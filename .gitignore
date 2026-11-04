@@ -1,0 +1,15 @@
+
+credentials/
+data/
+audio-cache/
+server-*.log
+__pycache__/
+runtime/
+voices/
+.env
+
+# Keep site configuration and data in a separate private repository.
+homelab/
+deployment/
+.env
+.env.*

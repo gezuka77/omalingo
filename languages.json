@@ -1,0 +1,102 @@
+[
+  {
+    "code": "fi",
+    "name": "Finnish",
+    "nativeName": "Suomi",
+    "voice": "fi_FI-harri-medium",
+    "voiceName": "Harri",
+    "speechLanguage": "fi",
+    "files": [
+      {
+        "path": "fi/fi_FI/harri/medium/fi_FI-harri-medium.onnx",
+        "size_bytes": 63201294,
+        "md5_digest": "8e96b9e765f8db3e910943520aa0f475"
+      },
+      {
+        "path": "fi/fi_FI/harri/medium/fi_FI-harri-medium.onnx.json",
+        "size_bytes": 4873,
+        "md5_digest": "d944b7607e545ee3a0d06887c3e4ccc4"
+      }
+    ]
+  },
+  {
+    "code": "en",
+    "name": "English",
+    "nativeName": "English",
+    "voice": "en_US-lessac-medium",
+    "voiceName": "Lessac",
+    "speechLanguage": "en",
+    "files": [
+      {
+        "path": "en/en_US/lessac/medium/en_US-lessac-medium.onnx",
+        "size_bytes": 63201294,
+        "md5_digest": "2fc642b535197b6305c7c8f92dc8b24f"
+      },
+      {
+        "path": "en/en_US/lessac/medium/en_US-lessac-medium.onnx.json",
+        "size_bytes": 4885,
+        "md5_digest": "c1f2b7bddefe113f3255ff9ef234cfd3"
+      }
+    ]
+  },
+  {
+    "code": "hu",
+    "name": "Hungarian",
+    "nativeName": "Magyar",
+    "voice": "hu_HU-anna-medium",
+    "voiceName": "Anna",
+    "speechLanguage": "hu",
+    "files": [
+      {
+        "path": "hu/hu_HU/anna/medium/hu_HU-anna-medium.onnx",
+        "size_bytes": 63201294,
+        "md5_digest": "3796f9fa28bd8d390d17828e2e2e952d"
+      },
+      {
+        "path": "hu/hu_HU/anna/medium/hu_HU-anna-medium.onnx.json",
+        "size_bytes": 5018,
+        "md5_digest": "ae63867e2c2cb6695555a17bdee8b751"
+      }
+    ]
+  },
+  {
+    "code": "zh-Hant",
+    "name": "Chinese (Traditional)",
+    "nativeName": "繁體中文",
+    "voice": "zh_CN-huayan-medium",
+    "voiceName": "Huayan",
+    "speechLanguage": "zh",
+    "files": [
+      {
+        "path": "zh/zh_CN/huayan/medium/zh_CN-huayan-medium.onnx",
+        "size_bytes": 63201294,
+        "md5_digest": "40cdb7930ff91b81574d5f0489e076ea"
+      },
+      {
+        "path": "zh/zh_CN/huayan/medium/zh_CN-huayan-medium.onnx.json",
+        "size_bytes": 4822,
+        "md5_digest": "1fda3ec1d0d3a5a74064397ea8fe0af0"
+      }
+    ]
+  },
+  {
+    "code": "ja",
+    "name": "Japanese",
+    "nativeName": "日本語",
+    "voice": "ja_JP-hi_fi_captain-medium",
+    "voiceName": "Hi Fi Captain",
+    "speechLanguage": "ja",
+    "files": [
+      {
+        "path": "ja/ja_JP/hi_fi_captain/medium/ja_JP-hi_fi_captain-medium.onnx",
+        "size_bytes": 76753841,
+        "md5_digest": "f9daab8970d06d7e9fc895a879854542"
+      },
+      {
+        "path": "ja/ja_JP/hi_fi_captain/medium/ja_JP-hi_fi_captain-medium.onnx.json",
+        "size_bytes": 5301,
+        "md5_digest": "828a68fa5fc7677f98ea336fa1d66512"
+      }
+    ]
+  }
+]

@@ -1,0 +1,740 @@
+[
+  {
+    "id": "zh-hant-cna-technology",
+    "language": "zh-Hant",
+    "name": "中央社 CNA · 科技",
+    "url": "https://feeds.feedburner.com/rsscna/technology",
+    "kind": "news",
+    "category": "Technology",
+    "availability": "verified",
+    "categories": [
+      "Technology"
+    ]
+  },
+  {
+    "id": "ja-nhk-news",
+    "language": "ja",
+    "name": "NHK ニュース",
+    "url": "https://www3.nhk.or.jp/rss/news/cat0.xml",
+    "kind": "news",
+    "category": "News Feed",
+    "availability": "verified",
+    "categories": [
+      "News Feed"
+    ]
+  },
+  {
+    "id": "en-story-zone",
+    "language": "en",
+    "name": "British Council · Story Zone",
+    "url": "https://learnenglish.britishcouncil.org/free-resources/general/story-zone",
+    "kind": "resource",
+    "mode": "website",
+    "category": "Reading",
+    "level": "A2–C1",
+    "access": "Free stories",
+    "description": "Short stories written for learners, with comprehension exercises.",
+    "availability": "verified",
+    "categories": [
+      "Reading",
+      "Mini Stories"
+    ]
+  },
+  {
+    "id": "en-elllo",
+    "language": "en",
+    "name": "ELLLO · Listening & Video",
+    "url": "https://elllo.org/",
+    "kind": "resource",
+    "mode": "website",
+    "category": "Videos",
+    "level": "A1–C1",
+    "access": "Free lessons",
+    "description": "Natural conversations and short videos. Most lessons include audio or video, a transcript and vocabulary.",
+    "availability": "verified",
+    "categories": [
+      "Videos",
+      "Reading",
+      "Podcasts"
+    ],
+    "directory": {
+      "selector": "a[href]",
+      "pattern": "^/(?:english|video)/.+\\.htm$",
+      "browseOnly": false
+    },
+    "feedUrl": "https://elllo.org/"
+  },
+  {
+    "id": "en-bc-podcasts",
+    "language": "en",
+    "name": "British Council · Podcasts",
+    "url": "https://learnenglish.britishcouncil.org/general-english/audio-series/podcasts",
+    "kind": "resource",
+    "mode": "website",
+    "category": "Podcasts",
+    "level": "A2–B1",
+    "access": "Free episodes and transcripts",
+    "description": "Everyday conversations, drama and language advice with scripts and exercises.",
+    "availability": "verified",
+    "categories": [
+      "Podcasts"
+    ]
+  },
+  {
+    "id": "hu-sziszi-video",
+    "language": "hu",
+    "name": "Hungarian with Sziszi · Videos",
+    "url": "https://www.youtube.com/channel/UCjZrfHwul22yOTl2G57eWPQ",
+    "kind": "video",
+    "mode": "website",
+    "category": "Videos",
+    "level": "Mixed levels",
+    "access": "Public YouTube videos",
+    "description": "Watch the free uploads from this Hungarian learning channel. Check captions before importing a video.",
+    "availability": "verified",
+    "feedUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=UCjZrfHwul22yOTl2G57eWPQ",
+    "categories": [
+      "Videos"
+    ]
+  },
+  {
+    "id": "zh-mandarinbean",
+    "language": "zh-Hant",
+    "name": "Mandarin Bean · Graded Reading",
+    "url": "https://mandarinbean.com/all-lessons/",
+    "kind": "resource",
+    "mode": "website",
+    "category": "Reading",
+    "level": "Beginner–advanced",
+    "access": "Free readings · no account required",
+    "description": "Use the free readings with Traditional Chinese selected. Read on the source site or paste the Traditional text into O/L.",
+    "availability": "verified",
+    "categories": [
+      "Reading",
+      "Mini Stories",
+      "Travel"
+    ],
+    "feedUrl": "https://mandarinbean.com/all-lessons/",
+    "directory": {
+      "selector": ".elementor-heading-title a[href]",
+      "pattern": "^/[^/]+/$",
+      "browseOnly": true
+    }
+  },
+  {
+    "id": "ja-tadoku",
+    "language": "ja",
+    "name": "Tadoku · Free Graded Readers",
+    "url": "https://tadoku.org/japanese/en/free-books-en/",
+    "kind": "resource",
+    "mode": "website",
+    "category": "Reading",
+    "level": "Starter–advanced",
+    "access": "Free books",
+    "description": "Illustrated graded readers and stories. Audio and YouTube versions are marked per book. Download a PDF to import it into O/L.",
+    "availability": "verified",
+    "categories": [
+      "Reading",
+      "Mini Stories"
+    ],
+    "feedUrl": "https://tadoku.org/japanese/en/free-books-en/",
+    "directory": {
+      "selector": "a[href]",
+      "pattern": "^/japanese/book/\\d+/$",
+      "browseOnly": true
+    }
+  },
+  {
+    "id": "ja-teppei",
+    "language": "ja",
+    "name": "Nihongo con Teppei · Beginner Podcast",
+    "url": "https://nihongoconteppei.com/",
+    "kind": "podcast",
+    "mode": "website",
+    "category": "Podcasts",
+    "level": "Beginner",
+    "access": "Free public episodes",
+    "description": "Short Japanese listening episodes on everyday topics. Choose an episode and use its available audio; audio transcription may use your configured API.",
+    "availability": "verified",
+    "feedUrl": "https://nihongoconteppei.com/feed/podcast/",
+    "categories": [
+      "Podcasts"
+    ]
+  },
+  {
+    "id": "ja-taekim",
+    "language": "ja",
+    "name": "Tae Kim · Japanese Grammar",
+    "url": "https://guidetojapanese.org/learn/grammar",
+    "kind": "resource",
+    "mode": "website",
+    "category": "Grammar",
+    "level": "Beginner–advanced",
+    "access": "Free guide",
+    "description": "Grammar explanations with Japanese examples. Best used as a reference alongside your reading.",
+    "availability": "verified",
+    "categories": [
+      "Grammar"
+    ]
+  },
+  {
+    "id": "fi-uusikielemme",
+    "language": "fi",
+    "name": "Uusi kielemme · Grammar",
+    "url": "https://uusikielemme.fi/finnish-grammar",
+    "kind": "resource",
+    "category": "Grammar",
+    "categories": [
+      "Grammar"
+    ],
+    "level": "Mixed levels",
+    "description": "Finnish grammar explanations in English with Finnish examples. Free reference material.",
+    "availability": "verified",
+    "access": "Public material · publisher conditions apply",
+    "mode": "website"
+  },
+  {
+    "id": "en-bc-course",
+    "language": "en",
+    "name": "British Council · A1 Listening",
+    "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+    "kind": "resource",
+    "category": "Guided Courses",
+    "categories": [
+      "Guided Courses",
+      "Reading",
+      "Podcasts"
+    ],
+    "level": "A1",
+    "description": "Short A1 listening lessons with publicly available transcripts and exercises.",
+    "availability": "verified",
+    "access": "Free · no account required",
+    "mode": "website",
+    "publicCourse": true,
+    "feedUrl": "https://learnenglish.britishcouncil.org/free-resources/listening/a1",
+    "directory": {
+      "browseOnly": true,
+      "lessons": [
+        {
+          "title": "A request from your boss",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1/request-your-boss"
+        },
+        {
+          "title": "A voicemail message",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1/voicemail-message"
+        },
+        {
+          "title": "Booking a table",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1/booking-table"
+        },
+        {
+          "title": "Finding the library",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1/finding-library"
+        },
+        {
+          "title": "Ordering in a café",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1/ordering-cafe"
+        },
+        {
+          "title": "Shopping for clothes",
+          "url": "https://learnenglish.britishcouncil.org/free-resources/listening/a1/shopping-clothes"
+        }
+      ]
+    }
+  },
+  {
+    "id": "en-bc-grammar",
+    "language": "en",
+    "name": "British Council · Grammar",
+    "url": "https://learnenglish.britishcouncil.org/grammar",
+    "kind": "resource",
+    "category": "Grammar",
+    "categories": [
+      "Grammar"
+    ],
+    "level": "Mixed levels",
+    "description": "Free grammar explanations and exercises; choose a level on the publisher’s site.",
+    "availability": "verified",
+    "access": "Public material · publisher conditions apply",
+    "mode": "website"
+  },
+  {
+    "id": "hu-wikibooks",
+    "language": "hu",
+    "name": "Wikibooks · Hungarian",
+    "url": "https://en.wikibooks.org/wiki/Hungarian",
+    "kind": "resource",
+    "category": "Grammar",
+    "categories": [
+      "Grammar",
+      "Guided Courses"
+    ],
+    "level": "Mixed levels",
+    "description": "Four public beginner lessons on pronunciation, greetings, vocabulary and grammar.",
+    "availability": "verified",
+    "access": "Free · no account required",
+    "mode": "website",
+    "publicCourse": true,
+    "feedUrl": "https://en.wikibooks.org/wiki/Hungarian",
+    "directory": {
+      "selector": "a[href]",
+      "pattern": "^/wiki/Hungarian/Lesson_[1-4]/?$",
+      "browseOnly": true
+    }
+  },
+  {
+    "id": "zh-grace-videos",
+    "language": "zh-Hant",
+    "name": "Grace Mandarin Chinese",
+    "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCC_fdR7zZ_5SU--xuOrEdKw",
+    "kind": "video",
+    "category": "Videos",
+    "categories": [
+      "Videos",
+      "Grammar"
+    ],
+    "level": "Mixed levels",
+    "description": "Taiwanese Mandarin teaching videos, pronunciation and everyday expressions. Check caption availability per video.",
+    "availability": "verified",
+    "access": "Public material · publisher conditions apply"
+  },
+  {
+    "id": "ja-irodori",
+    "language": "ja",
+    "name": "Japan Foundation · Irodori",
+    "url": "https://www.irodori.jpf.go.jp/en/",
+    "kind": "resource",
+    "category": "Guided Courses",
+    "categories": [
+      "Guided Courses",
+      "Travel",
+      "Grammar"
+    ],
+    "level": "A1–A2",
+    "description": "Japan Foundation starter lessons for everyday Japanese. Import individual lesson PDFs or play the recordings on the publisher’s site.",
+    "availability": "verified",
+    "access": "Free · no account required",
+    "mode": "website",
+    "feedUrl": "https://www.irodori.jpf.go.jp/en/starter/pdf.html",
+    "directory": {
+      "selector": "a[href]",
+      "pattern": "^/assets/data/starter/pdf/X_(?:kyoshitsu|L(?:0[1-9]|1[0-8]))\\.pdf$",
+      "titleFromHeading": true,
+      "browseOnly": false
+    },
+    "publicCourse": true
+  },
+  {
+    "id": "ja-ci-videos",
+    "language": "ja",
+    "name": "Natural Japanese · Visual Listening",
+    "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCXo8kuCtqLjL1EH6m4FJJNA",
+    "kind": "video",
+    "category": "Videos",
+    "categories": [
+      "Videos",
+      "Mini Stories"
+    ],
+    "level": "Mixed levels",
+    "description": "Visual Japanese listening practice, formerly Comprehensible Japanese. Public channel videos; additional publisher material may require access.",
+    "availability": "verified",
+    "access": "Public material · publisher conditions apply"
+  },
+  {
+    "id": "zh-Hant-topic-sports",
+    "language": "zh-Hant",
+    "name": "中央社 CNA · Sports",
+    "url": "https://feeds.feedburner.com/rsscna/sport",
+    "kind": "news",
+    "category": "Sports",
+    "categories": [
+      "Sports"
+    ],
+    "level": "Mixed levels",
+    "description": "Public publisher material for personal language study. Choose an individual item to import.",
+    "availability": "verified",
+    "access": "Public material · publisher conditions apply"
+  },
+  {
+    "id": "zh-Hant-topic-entertainment",
+    "language": "zh-Hant",
+    "name": "中央社 CNA · Entertainment",
+    "url": "https://feeds.feedburner.com/rsscna/culture",
+    "kind": "news",
+    "category": "Entertainment",
+    "categories": [
+      "Entertainment"
+    ],
+    "level": "Mixed levels",
+    "description": "Public publisher material for personal language study. Choose an individual item to import.",
+    "availability": "verified",
+    "access": "Public material · publisher conditions apply"
+  },
+  {
+    "id": "ja-topic-sports",
+    "language": "ja",
+    "name": "NHK · Sports",
+    "url": "https://www3.nhk.or.jp/rss/news/cat7.xml",
+    "kind": "news",
+    "category": "Sports",
+    "categories": [
+      "Sports"
+    ],
+    "level": "Mixed levels",
+    "description": "Public publisher material for personal language study. Choose an individual item to import.",
+    "availability": "verified",
+    "access": "Public material · publisher conditions apply"
+  },
+  {
+    "id": "ja-topic-technology",
+    "language": "ja",
+    "name": "NHK · Technology",
+    "url": "https://www3.nhk.or.jp/rss/news/cat3.xml",
+    "kind": "news",
+    "category": "Technology",
+    "categories": [
+      "Technology"
+    ],
+    "level": "Mixed levels",
+    "description": "Public publisher material for personal language study. Choose an individual item to import.",
+    "availability": "verified",
+    "access": "Public material · publisher conditions apply"
+  },
+  {
+    "id": "ja-topic-entertainment",
+    "language": "ja",
+    "name": "NHK · Entertainment",
+    "url": "https://www3.nhk.or.jp/rss/news/cat2.xml",
+    "kind": "news",
+    "category": "Entertainment",
+    "categories": [
+      "Entertainment"
+    ],
+    "level": "Mixed levels",
+    "description": "Public publisher material for personal language study. Choose an individual item to import.",
+    "availability": "verified",
+    "access": "Public material · publisher conditions apply"
+  },
+  {
+    "id": "fi-travel-reading",
+    "language": "fi",
+    "name": "Luontoon · Outdoors in Finland",
+    "url": "https://www.luontoon.fi/fi",
+    "kind": "resource",
+    "category": "Travel",
+    "categories": [
+      "Travel",
+      "Reading"
+    ],
+    "level": "Mixed levels",
+    "description": "Travel and place guides in the study language. Browse the publisher and import an individual article.",
+    "availability": "verified",
+    "access": "Public material · publisher conditions apply",
+    "mode": "website"
+  },
+  {
+    "id": "en-travel-reading",
+    "language": "en",
+    "name": "Wikivoyage · Travel",
+    "url": "https://en.wikivoyage.org/wiki/Main_Page",
+    "kind": "resource",
+    "category": "Travel",
+    "categories": [
+      "Travel",
+      "Reading"
+    ],
+    "level": "Mixed levels",
+    "description": "Travel and place guides in the study language. Browse the publisher and import an individual article.",
+    "availability": "verified",
+    "access": "Public material · publisher conditions apply",
+    "mode": "website"
+  },
+  {
+    "id": "hu-travel-reading",
+    "language": "hu",
+    "name": "Csodás Magyarország",
+    "url": "https://csodasmagyarorszag.hu/",
+    "kind": "resource",
+    "category": "Travel",
+    "categories": [
+      "Travel",
+      "Reading"
+    ],
+    "level": "Mixed levels",
+    "description": "Travel and place guides in the study language. Browse the publisher and import an individual article.",
+    "availability": "verified",
+    "access": "Public material · publisher conditions apply",
+    "mode": "website"
+  },
+  {
+    "id": "zh-Hant-travel-reading",
+    "language": "zh-Hant",
+    "name": "Taiwan Tourism · 臺灣觀光",
+    "url": "https://www.taiwan.net.tw/",
+    "kind": "resource",
+    "category": "Travel",
+    "categories": [
+      "Travel",
+      "Reading"
+    ],
+    "level": "Mixed levels",
+    "description": "Travel and place guides in the study language. Browse the publisher and import an individual article.",
+    "availability": "verified",
+    "access": "Public material · publisher conditions apply",
+    "mode": "website"
+  },
+  {
+    "id": "ja-travel-reading",
+    "language": "ja",
+    "name": "MATCHA · 日本の観光",
+    "url": "https://matcha-jp.com/jp/",
+    "kind": "resource",
+    "category": "Travel",
+    "categories": [
+      "Travel",
+      "Reading"
+    ],
+    "level": "Mixed levels",
+    "description": "Travel and place guides in the study language. Browse the publisher and import an individual article.",
+    "availability": "verified",
+    "access": "Public material · publisher conditions apply",
+    "mode": "website"
+  },
+  {
+    "id": "fi-short-picture-stories",
+    "language": "fi",
+    "name": "Papunet · Rikun päivä mökillä",
+    "url": "https://papunet.net/verkkokirjat/rikun-paiva-mokilla/",
+    "kind": "resource",
+    "mode": "website",
+    "category": "Mini Stories",
+    "categories": [
+      "Mini Stories",
+      "Reading"
+    ],
+    "level": "Beginner",
+    "description": "A short illustrated story in easy Finnish with listening. Open the story on Papunet and study a short section.",
+    "access": "Free public short story",
+    "availability": "verified"
+  },
+  {
+    "id": "hu-short-reading",
+    "language": "hu",
+    "name": "Hungarian Online · Five-minute Reading",
+    "url": "https://hungarianonline.hu/reading_in_hungarian",
+    "kind": "resource",
+    "mode": "website",
+    "category": "Mini Stories",
+    "categories": [
+      "Mini Stories",
+      "Reading"
+    ],
+    "level": "Mixed levels",
+    "description": "Short Hungarian reading selections intended for a few minutes of practice. Choose one text rather than a collection.",
+    "access": "Public reading selections",
+    "availability": "verified"
+  },
+  {
+    "id": "fi-yle-supisuomea",
+    "language": "fi",
+    "name": "Yle · Supisuomea",
+    "url": "https://yle.fi/a/20-146210",
+    "kind": "resource",
+    "category": "Guided Courses",
+    "categories": [
+      "Guided Courses",
+      "Grammar",
+      "Travel"
+    ],
+    "level": "Beginner",
+    "mode": "website",
+    "access": "Free · no account required",
+    "description": "Nine beginner units on everyday Finnish, with dialogues, videos and exercises on Yle.",
+    "availability": "verified",
+    "publicCourse": true,
+    "feedUrl": "https://yle.fi/a/20-146210",
+    "directory": {
+      "selector": "a[href]",
+      "pattern": "^/a/20-\\d+/?$",
+      "titlePattern": "^(?:Supisuomea, )?osa [1-9]:",
+      "browseOnly": true
+    }
+  },
+  {
+    "id": "zh-hant-legit-mando",
+    "language": "zh-Hant",
+    "name": "TaiwanPlus · Legit Mando",
+    "url": "https://www.taiwanplus.com/shows/mandarin-learning/all/523/legit-mando",
+    "kind": "resource",
+    "category": "Guided Courses",
+    "categories": [
+      "Guided Courses",
+      "Videos",
+      "Travel"
+    ],
+    "level": "Beginner",
+    "mode": "website",
+    "access": "Free · no account required",
+    "description": "Short Taiwanese Mandarin lessons and everyday dialogues. Watch the episodes on TaiwanPlus.",
+    "availability": "verified",
+    "publicCourse": true,
+    "feedUrl": "https://www.taiwanplus.com/shows/mandarin-learning/all/523/legit-mando",
+    "directory": {
+      "selector": "a[href]",
+      "pattern": "^/shows/mandarin-learning/all/523/legit-mando/s\\d+/\\d+/[^/]+/?$",
+      "titlePattern": "EP\\s*\\d+",
+      "browseOnly": true
+    }
+  },
+  {
+    "id": "en-yle-news",
+    "language": "en",
+    "name": "Yle News in English",
+    "url": "https://yle.fi/rss/news",
+    "kind": "news",
+    "category": "News Feed",
+    "categories": [
+      "News Feed"
+    ],
+    "availability": "verified",
+    "access": "Free · no account required",
+    "description": "News from Finland in English on the public broadcaster’s feed."
+  },
+  {
+    "id": "hu-hirado",
+    "language": "hu",
+    "name": "Híradó · Public news",
+    "url": "https://hirado.hu/",
+    "kind": "news",
+    "mode": "website",
+    "category": "News Feed",
+    "categories": [
+      "News Feed"
+    ],
+    "availability": "verified",
+    "access": "Free · no account required",
+    "description": "Read public Hungarian news and choose an individual article to import."
+  },
+  {
+    "id": "en-academy-news",
+    "language": "en",
+    "name": "Academy · Film news",
+    "url": "https://www.oscars.org/news",
+    "category": "Entertainment",
+    "description": "Public announcements about films and the Academy Awards.",
+    "access": "Free · no account required",
+    "categories": [
+      "Entertainment"
+    ],
+    "availability": "verified",
+    "kind": "resource",
+    "mode": "website"
+  },
+  {
+    "id": "en-olympic-news",
+    "language": "en",
+    "name": "International Olympic Committee · News",
+    "url": "https://www.olympics.com/ioc/news",
+    "category": "Sports",
+    "description": "Public Olympic news and articles.",
+    "access": "Free · no account required",
+    "categories": [
+      "Sports"
+    ],
+    "availability": "verified",
+    "kind": "resource",
+    "mode": "website"
+  },
+  {
+    "id": "en-nasa-technology",
+    "language": "en",
+    "name": "NASA · Technology",
+    "url": "https://www.nasa.gov/technology/",
+    "category": "Technology",
+    "description": "Public articles about space technology and engineering.",
+    "access": "Free · no account required",
+    "categories": [
+      "Technology"
+    ],
+    "availability": "verified",
+    "kind": "resource",
+    "mode": "website"
+  },
+  {
+    "id": "hu-telex-after",
+    "language": "hu",
+    "name": "Telex · After",
+    "url": "https://telex.hu/rovat/after",
+    "category": "Entertainment",
+    "description": "Free Hungarian coverage of music and popular culture.",
+    "access": "Free · no account required",
+    "categories": [
+      "Entertainment"
+    ],
+    "availability": "verified",
+    "kind": "resource",
+    "mode": "website"
+  },
+  {
+    "id": "hu-telex-sport",
+    "language": "hu",
+    "name": "Telex · Sport",
+    "url": "https://telex.hu/rovat/sport",
+    "category": "Sports",
+    "description": "Free Hungarian sports reporting.",
+    "access": "Free · no account required",
+    "categories": [
+      "Sports"
+    ],
+    "availability": "verified",
+    "kind": "resource",
+    "mode": "website"
+  },
+  {
+    "id": "hu-telex-techtud",
+    "language": "hu",
+    "name": "Telex · Tech-Tud",
+    "url": "https://telex.hu/rovat/techtud",
+    "category": "Technology",
+    "description": "Free Hungarian reporting on technology and science.",
+    "access": "Free · no account required",
+    "categories": [
+      "Technology"
+    ],
+    "availability": "verified",
+    "kind": "resource",
+    "mode": "website"
+  },
+  {
+    "id": "hu-telex-podcasts",
+    "language": "hu",
+    "name": "Telex · Podcasts",
+    "url": "https://telex.hu/rovat/podcast",
+    "category": "Podcasts",
+    "description": "Listen to the public Hungarian episodes on Telex.",
+    "access": "Free · no account required",
+    "categories": [
+      "Podcasts"
+    ],
+    "availability": "verified",
+    "kind": "podcast",
+    "mode": "website"
+  },
+  {
+    "id": "zh-hant-abby-public",
+    "language": "zh-Hant",
+    "name": "Talk Taiwanese Mandarin with Abby · Public episodes",
+    "url": "https://talktaiwanesemandarin.com/",
+    "category": "Podcasts",
+    "description": "Listen to the public Taiwanese Mandarin podcast. Episodes open on the publisher’s site.",
+    "access": "Free · no account required",
+    "categories": [
+      "Podcasts"
+    ],
+    "availability": "verified",
+    "kind": "podcast",
+    "mode": "website",
+    "feedUrl": "https://feeds.soundon.fm/podcasts/8329ce3a-6cc8-4a3c-a12d-1a5b934060a0.xml",
+    "browseOnly": true
+  }
+]

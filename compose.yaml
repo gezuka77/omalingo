@@ -1,0 +1,33 @@
+name: omalingo
+
+services:
+  omalingo:
+    image: "${OMA_IMAGE:-omalingo-omalingo:latest}"
+    build: .
+    init: true
+    restart: unless-stopped
+    environment:
+      OMA_PORT: "${OMA_PORT:-3222}"
+      OMA_PUBLIC_ORIGIN: "${OMA_PUBLIC_ORIGIN:-}"
+      OMA_OLLAMA_URL: "${OMA_OLLAMA_URL:-}"
+      OMA_ANKI_CONNECT_URL: "${OMA_ANKI_CONNECT_URL:-}"
+      OMA_ANKI_SERVER_URL: "${OMA_ANKI_SERVER_URL:-}"
+      OMA_ANKI_ACCOUNTS_FILE: "${OMA_ANKI_ACCOUNTS_FILE:-}"
+      OMA_ANKI_API_KEY: "${OMA_ANKI_API_KEY:-}"
+    ports:
+      - "127.0.0.1:${OMA_PORT:-3222}:${OMA_PORT:-3222}"
+    volumes:
+      - library:/var/lib/omalingo
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:' + process.env.OMA_PORT + '/api/health').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+volumes:
+  library:

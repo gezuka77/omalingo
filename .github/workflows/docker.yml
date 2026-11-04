@@ -1,0 +1,90 @@
+name: Build Oma Lingo Docker image
+
+on:
+  workflow_dispatch:
+    inputs:
+      release:
+        description: Publish the numbered release from VERSION
+        type: boolean
+        default: false
+
+concurrency:
+  group: omalingo-image-publish
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Verify source and tests
+        run: |
+          python3 scripts/check_public_source.py
+          python3 scripts/build_frontend.py --check
+          node --check app.js
+          node --test tests/*.test.cjs
+
+      - name: Read version
+        id: release
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          if [[ "$GITHUB_REF" != "refs/heads/$DEFAULT_BRANCH" ]]; then
+            echo "Run the image build from the default branch." >&2
+            exit 1
+          fi
+          version="$(cat VERSION)"
+          if [[ ! "$version" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+            echo "VERSION must be in MAJOR.MINOR.PATCH format." >&2
+            exit 1
+          fi
+          grep -Fq "## [$version]" CHANGELOG.md
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Build image
+        env:
+          IMAGE_VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          image="ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/omalingo-app"
+          docker build --platform linux/amd64 \
+            --label "org.opencontainers.image.source=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}" \
+            --label "org.opencontainers.image.revision=${GITHUB_SHA}" \
+            --label "org.opencontainers.image.version=$IMAGE_VERSION" \
+            --tag "$image:$GITHUB_SHA" --tag "$image:latest" .
+
+      - name: Publish image
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IMAGE_VERSION: ${{ steps.release.outputs.version }}
+          NUMBERED_RELEASE: ${{ inputs.release }}
+        run: |
+          image="ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/omalingo-app"
+          printf '%s' "$GHCR_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          if [[ "$NUMBERED_RELEASE" == "true" ]]; then
+            tag="$image:v$IMAGE_VERSION"
+            if inspect="$(docker buildx imagetools inspect "$tag" 2>&1)"; then
+              echo "$tag already exists. Bump VERSION and update CHANGELOG.md." >&2
+              exit 1
+            elif [[ "$inspect" != *"not found"* && "$inspect" != *"manifest unknown"* && "$inspect" != *"no such manifest"* ]]; then
+              printf '%s\n' "$inspect" >&2
+              exit 1
+            fi
+          fi
+          docker push "$image:$GITHUB_SHA"
+          if [[ "$NUMBERED_RELEASE" == "true" ]]; then
+            docker tag "$image:$GITHUB_SHA" "$tag"
+            docker push "$tag"
+          fi
+          docker push "$image:latest"

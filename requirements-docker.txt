@@ -1,0 +1,12 @@
+argostranslate==1.11.0
+av>=11,<20
+beautifulsoup4>=4.12,<5
+faster-whisper==1.2.1
+genanki==0.13.1
+mobi==0.4.1
+numpy>=1.26,<3
+onnxruntime>=1.20,<2
+piper-tts[ja]==1.8.0
+pypdf>=5,<8
+requests>=2.32,<3
+yt-dlp[default]>=2026.10.26

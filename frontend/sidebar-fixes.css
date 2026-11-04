@@ -1,0 +1,53 @@
+/* One icon grid for the 64px rail, with a discoverable toggle. */
+.app-sidebar #collapse-sidebar{display:flex;align-items:center;justify-content:center;flex:0 0 32px;width:32px;height:32px;min-height:32px;padding:3px;border:1px solid #d7dde3;border-radius:7px;background:#f7f8fa;color:#526475}
+.app-sidebar #collapse-sidebar:hover{background:#eaf0f3;color:#102b3d}
+.app-sidebar #collapse-sidebar svg{display:block;width:22px;height:22px}
+.app-sidebar #brand-home>svg{display:block;width:32px;height:32px}
+.app-sidebar .sidebar-nav-icon{display:flex;align-items:center;justify-content:center;width:24px;height:24px;flex:0 0 24px}
+.app-sidebar .sidebar-nav-icon>svg{display:block;width:24px;height:24px}
+.app-sidebar #create-menu .create-icon{width:32px;height:32px;flex:0 0 32px;display:flex;align-items:center;justify-content:center;padding:3px;font-size:0;line-height:1}
+.app-sidebar #create-menu .create-icon svg{display:block;width:24px;height:24px}
+.app-sidebar .library-rail-icon{display:none;width:24px;height:24px;align-items:center;justify-content:center;flex:0 0 24px}
+.app-sidebar #library-menu:before{content:none!important;display:none!important}
+.sidebar-collapsed .app-sidebar{padding:14px 8px 0;align-items:center}
+.sidebar-collapsed .app-sidebar .sidebar-brand{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;flex:0 0 92px;height:92px;width:48px;gap:7px;margin:0 0 10px;padding:0}
+.sidebar-collapsed .app-sidebar .sidebar-brand #brand-home{display:flex;align-items:center;justify-content:center;width:48px;height:43px;min-height:43px;padding:0;margin:0;gap:0}
+.sidebar-collapsed .app-sidebar .sidebar-brand #collapse-sidebar{display:flex!important;flex:0 0 30px;min-height:30px;height:30px;width:32px;padding:3px;margin:0}
+.sidebar-collapsed .app-sidebar>button{display:flex;align-items:center;justify-content:center;width:48px;min-width:48px;height:48px;min-height:48px;padding:0;margin-left:auto;margin-right:auto;gap:0}
+.sidebar-collapsed .app-sidebar #library-menu .library-rail-icon{display:flex}
+.sidebar-collapsed .app-sidebar #library-menu .library-chevron{display:none!important}
+.sidebar-collapsed .app-sidebar #create-menu{margin-bottom:10px}
+.sidebar-collapsed .app-sidebar .sidebar-divider{align-self:stretch;margin:22px -8px 4px}
+.sidebar-collapsed .app-sidebar .sidebar-bottom{width:64px;padding:12px 8px;margin-top:auto;justify-content:center;align-items:center}
+.sidebar-collapsed .app-sidebar .sidebar-bottom #profile-menu{display:flex;align-items:center;justify-content:center;flex:0 0 48px;width:48px;min-height:48px;padding:0;gap:0}
+.sidebar-collapsed .app-sidebar .sidebar-bottom .avatar{margin:0;width:38px;height:38px;flex:0 0 38px}
+#sidebar-backdrop{position:fixed;inset:0 0 0 260px;z-index:11;border:0;border-radius:0;background:#091e3344;padding:0}
+.reader-mode .reader-side-prev{left:calc(var(--sidebar-width) + 16px)}
+.reader-mode .reading-bottom{left:calc(var(--sidebar-width) + 26px)}
+@media(max-width:800px){
+ .app-sidebar .sidebar-brand{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;flex:0 0 92px;height:92px;width:48px;gap:7px;margin:0 0 10px;padding:0}
+ .app-sidebar .sidebar-brand #collapse-sidebar{display:flex!important;min-height:30px;height:30px;width:32px;padding:3px;margin:0}
+ .app-sidebar .sidebar-brand #brand-home{display:flex;align-items:center;justify-content:center;width:48px;height:43px;min-height:43px;padding:0;gap:0}
+ .app-sidebar>button{display:flex;align-items:center;justify-content:center;width:48px;min-width:48px;height:48px;min-height:48px;padding:0;gap:0}
+ .app-sidebar #library-menu .library-rail-icon{display:flex}
+ .app-sidebar #library-menu .library-chevron{display:none!important}
+ body.mobile-sidebar-open{--sidebar-width:260px}
+ .mobile-sidebar-open .app-sidebar{width:260px;align-items:stretch;padding:14px 10px 0;box-shadow:6px 0 24px #10233225}
+ .mobile-sidebar-open .workspace{margin-left:64px!important}
+ .mobile-sidebar-open .persistent-player{left:64px!important}
+ .mobile-sidebar-open .app-sidebar .nav-label{display:inline!important}
+ .mobile-sidebar-open .app-sidebar .sidebar-brand{flex:0 0 57px;flex-direction:row;justify-content:space-between;align-items:center;height:57px;width:auto;gap:6px;margin-bottom:12px}
+ .mobile-sidebar-open .app-sidebar .sidebar-brand #brand-home{width:auto;padding:4px 10px;gap:12px;justify-content:flex-start}
+ .mobile-sidebar-open .app-sidebar .sidebar-brand #collapse-sidebar{flex:0 0 32px;width:32px}
+ .mobile-sidebar-open .app-sidebar>button{width:100%;min-width:0;height:49px;padding:11px 13px;gap:14px;justify-content:flex-start}
+ .mobile-sidebar-open .app-sidebar #library-menu .library-rail-icon{display:none}
+ .mobile-sidebar-open .app-sidebar #library-menu .library-chevron{display:flex!important}
+ .mobile-sidebar-open .app-sidebar #library-branch:not([hidden]){display:block!important}
+ .mobile-sidebar-open .app-sidebar #library-branch button{width:100%;padding:6px 16px;justify-content:flex-start;text-align:left;min-height:38px}
+ .mobile-sidebar-open .app-sidebar #recent-lessons{display:block!important}
+ .mobile-sidebar-open .app-sidebar #recent-lessons button{width:100%;padding:8px 13px;justify-content:flex-start;gap:12px}
+ .mobile-sidebar-open .app-sidebar .sidebar-divider{margin:25px -10px 4px}
+ .mobile-sidebar-open .app-sidebar .sidebar-bottom{width:auto;margin-top:auto;padding:14px 10px;justify-content:flex-start}
+ .mobile-sidebar-open .app-sidebar .sidebar-bottom #profile-menu{width:auto;flex:1;padding:8px 10px;gap:12px;justify-content:flex-start}
+ .reader-mode .reading-bottom{left:auto}
+}

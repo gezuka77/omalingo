@@ -1,0 +1,12 @@
+**
+!requirements-docker.txt
+!*.cjs
+launcher.cjs
+!*.py
+!index.html
+!app.js
+!core.js
+!source-catalog.js
+!languages.json
+!retired-source-ids.json
+!shared-source-seeds.json

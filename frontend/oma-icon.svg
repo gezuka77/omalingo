@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="oma-lettermark">
+  <title>O/L lettermark</title>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      .lettermark-tile { fill: #a4d2ba; }
+      .lettermark-o { stroke: #1a3e32; }
+      .lettermark-l { stroke: #417b63; }
+    }
+  </style>
+  <rect class="lettermark-tile" width="64" height="64" rx="18" fill="#224a3a"/>
+  <circle class="lettermark-o" cx="26.6" cy="28.5" r="10.7" fill="none" stroke="#c6edda" stroke-width="6.1"/>
+  <path class="lettermark-l" d="M39 25v16.5a4 4 0 0 0 4 4h9.5" fill="none" stroke="#83c1a7" stroke-width="6.4"/>
+</svg>
