@@ -1,0 +1,21 @@
+name: Validate Oma Lingo
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: Verify public source and application behavior
+        run: |
+          python3 scripts/check_public_source.py
+          python3 scripts/build_frontend.py --check
+          node --check app.js
+          node --test tests/*.test.cjs
