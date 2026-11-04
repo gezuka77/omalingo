@@ -69,7 +69,12 @@ function syncLocalSpeechFollow(){
  active=null;for(const el of $$('#reader-text .token')){const start=Number(el.dataset.start)+offset,end=Number(el.dataset.end)+offset;const on=start<part.end&&end>part.start;el.classList.toggle('sounding',on);if(on&&!active)active=el;}
  syncLocalSpeechFollow.root=root;syncLocalSpeechFollow.mark=mark;syncLocalSpeechFollow.active=active;
  }
- if(active&&!player.paused)followReaderPlayback(active,l,part.start);
+ if(active&&!player.paused){
+  const progress=Number.isFinite(player.duration)&&player.duration>0?Math.min(.99,player.currentTime/player.duration):0;
+  const relative=Math.floor(part.text.length*progress),start=part.start+l.text.slice(part.start,part.end).indexOf(part.text);
+  const target=$$('#reader-text .sounding').find(el=>Number(el.dataset.end)+offset>=start+relative)||active;
+  followReaderPlayback(target,l,part.start+relative);
+ }
 }
 
 function refreshSentenceVocabulary(){
