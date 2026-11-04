@@ -28,6 +28,34 @@ function selectionContext(text,term){const needle=words(term).map(norm);if(!need
 const api={norm,words,tokens,segments,selectionContext,uuid,defaults,withoutChat,migrate,validate,term,grade,csvParse,exportCSV,importCSV,subtitle,stats,event,matches,intervals};root.OmaCore=api;if(typeof module!=='undefined')module.exports=api;
 })(globalThis);
 
+/* Preserve the tapped media element across asynchronous speech generation. */
+(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.OmaAudio=api;})(globalThis,()=>{
+ const silence='data:audio/wav;base64,UklGRnQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YVAAAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgA==';
+ const primed=new WeakSet(),pending=new WeakSet();
+ function prime(audio){
+  if(!audio||primed.has(audio)||pending.has(audio)||audio.getAttribute('src'))return;
+  audio.setAttribute('playsinline','');audio.src=silence;pending.add(audio);
+  const clear=()=>{if(audio.getAttribute('src')===silence){audio.pause();audio.removeAttribute('src');}};
+  try{Promise.resolve(audio.play()).then(()=>{primed.add(audio);clear();},clear).finally(()=>pending.delete(audio));}
+  catch{clear();pending.delete(audio);}
+ }
+ async function play(audio,{isCurrent=()=>true,onBlocked=()=>{}}={}){
+  if(!isCurrent())return false;
+  audio.setAttribute('playsinline','');
+  const source=audio.src;
+  try{await audio.play();return true;}
+  catch(error){
+   if(error?.name!=='NotAllowedError')throw error;
+   if(isCurrent()&&audio.src===source)onBlocked(async()=>{
+    if(!isCurrent()||audio.src!==source)return false;
+    await audio.play();return true;
+   });
+   return false;
+  }
+ }
+ return {prime,play};
+});
+
 (function(root){
 'use strict';
 const catalog=Object.freeze([
@@ -118,6 +146,7 @@ if(typeof module!=='undefined'&&module.exports)module.exports=root.OmaSourceCata
 const demo=[{id:'morning',title:'A quiet morning in Helsinki',subtitle:'Arki Helsingissä',icon:'☕',text:'Aamulla kaupunki on hiljainen. Minä kävelen pieneen kahvilaan. Tilaan kahvin ja tuoreen leivän. Ikkunan takana sataa vähän vettä. Tänään minulla ei ole kiire. Istun hetken ja katson ihmisiä. Sitten lähden kirjastoon. Haluan löytää uuden kirjan.',translation:'In the morning the city is quiet. I walk to a small café. I order coffee and fresh bread. Outside the window it is raining a little. Today I am not in a hurry. I sit for a moment and watch people. Then I leave for the library. I want to find a new book.',created:1},{id:'forest',title:'An afternoon in the forest',subtitle:'Pieni retki',icon:'🌲',text:'Lauantaina menemme metsään. Ilma on viileä ja aurinko paistaa. Polun vieressä kasvaa paljon puita. Kuuntelemme lintuja ja kävelemme hitaasti. Järven rannalla pidämme tauon. Minulla on mukana teetä ja voileipiä. Täällä on hyvä olla.',translation:'On Saturday we go to the forest. The air is cool and the sun is shining. Many trees grow beside the path. We listen to birds and walk slowly. We take a break by the lake. I have tea and sandwiches with me. It feels good to be here.',created:2}];
 const dictionary={aamulla:'in the morning',kaupunki:'city',on:'is',hiljainen:'quiet',minä:'I',kävelen:'I walk',pieneen:'into a small',kahvilaan:'to a café',tilaan:'I order',kahvin:'a coffee',ja:'and',tuoreen:'fresh',leivän:'bread',ikkunan:'of the window',takana:'behind / outside',sataa:'it rains',vähän:'a little',vettä:'water',tänään:'today',minulla:'I have / for me',ei:'not',ole:'be',kiire:'hurry',istun:'I sit',hetken:'a moment',katson:'I watch',ihmisiä:'people',sitten:'then',lähden:'I leave',kirjastoon:'to the library',haluan:'I want',löytää:'to find',uuden:'new',kirjan:'a book',lauantaina:'on Saturday',menemme:'we go',metsään:'into the forest',ilma:'air / weather',viileä:'cool',aurinko:'sun',paistaa:'shines',polun:'of the path',vieressä:'beside',kasvaa:'grows',paljon:'a lot',puita:'trees',kuuntelemme:'we listen',lintuja:'birds',kävelemme:'we walk',hitaasti:'slowly',järven:'of the lake',rannalla:'on the shore',pidämme:'we take / hold',tauon:'a break',mukana:'with / along',teetä:'tea',voileipiä:'sandwiches',täällä:'here',hyvä:'good',olla:'to be'};
 const OMA_BRAND_NAME="Oma Lingo";
+const OMA_RELEASE_VERSION="0.2.1";
 const OMA_SHORT_NAME="O/L";
 const omaBrandMark="<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" class=\"oma-lettermark\" aria-hidden=\"true\" focusable=\"false\">\n  <rect class=\"lettermark-tile\" width=\"64\" height=\"64\" rx=\"18\" fill=\"#224a3a\"/>\n  <circle class=\"lettermark-o\" cx=\"26.6\" cy=\"28.5\" r=\"10.7\" fill=\"none\" stroke=\"#c6edda\" stroke-width=\"6.1\"/>\n  <path class=\"lettermark-l\" d=\"M39 25v16.5a4 4 0 0 0 4 4h9.5\" fill=\"none\" stroke=\"#83c1a7\" stroke-width=\"6.4\"/>\n</svg>";
 const olReadingFox="<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ol-reading-fox\" viewBox=\"0 0 88 88\" aria-hidden=\"true\" focusable=\"false\">\n  <ellipse cx=\"44\" cy=\"77\" rx=\"32\" ry=\"4\" fill=\"#739181\" opacity=\".22\"/>\n  <path d=\"M54 63c9-1 14-7 17-15 8 5 12 12 10 19-3 11-16 15-28 9z\" fill=\"#ac644d\"/>\n  <path d=\"M71 48c7 4 11 9 11 15-5 1-9 0-13-4l-4 1c3-3 5-7 6-12z\" fill=\"#f0d8b7\"/>\n  <path d=\"M26 73c-2-12 3-23 15-26 14-3 24 6 23 20l-3 7z\" fill=\"#ba7357\"/>\n  <path d=\"M20 34 19 11c8 1 16 6 21 13m7 0c5-7 12-12 21-14l-2 24\" fill=\"#b36c52\" stroke=\"#b36c52\" stroke-width=\"3\" stroke-linejoin=\"round\"/>\n  <path d=\"m24 18 11 9-10 4zm38-1-11 10 10 4z\" fill=\"#efbd9c\"/>\n  <path d=\"M15 40c1-11 13-19 28-19 16 0 29 8 30 19-7 11-18 17-29 17-12 0-23-6-29-17z\" fill=\"#d98f68\"/>\n  <path d=\"M15 40c10-5 20 0 29 9 10-9 20-14 29-9-7 11-18 17-29 17-12 0-23-6-29-17z\" fill=\"#f0d8b7\"/>\n  <path d=\"M27 37c2 2 5 3 8 2m18 0c3 1 6 0 8-2\" fill=\"none\" stroke=\"#4c3832\" stroke-width=\"2.1\" stroke-linecap=\"round\"/>\n  <path d=\"M40 47q4-3 8 0-1 4-4 4t-4-4z\" fill=\"#4c3832\"/>\n  <path d=\"M23 56c8-3 15-2 21 2 6-4 13-5 21-2v8H23z\" fill=\"#f0e9d5\"/>\n  <path d=\"M21 58c9-2 17-1 23 3 6-4 14-5 23-3v17c-9-2-17-1-23 3-6-4-14-5-23-3z\" fill=\"#39705b\"/>\n  <path d=\"M44 72v5\" fill=\"none\" stroke=\"#629581\" stroke-width=\"1.4\"/>\n  <g fill=\"none\" stroke=\"#d5efe1\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n    <ellipse cx=\"33.5\" cy=\"65.5\" rx=\"4\" ry=\"4.5\"/>\n    <path d=\"m41 70 6-9m5 0v9h6\"/>\n  </g>\n  <ellipse cx=\"23\" cy=\"64\" rx=\"3.3\" ry=\"4\" fill=\"#ca8663\"/>\n  <ellipse cx=\"65\" cy=\"64\" rx=\"3.3\" ry=\"4\" fill=\"#ca8663\"/>\n</svg>";
@@ -203,7 +232,7 @@ const mediaTime=()=>videoMode?youtube?.getCurrentTime?.()||0:player.currentTime;
 const mediaDuration=()=>videoMode?youtube?.getDuration?.()||0:player.duration;
 const mediaPlaying=()=>videoMode?youtube?.getPlayerState?.()===1:!player.paused&&!player.ended;
 function pauseMedia(){if(videoMode)youtube?.pauseVideo?.();else player.pause();}
-function playMedia(){if(document.hidden||lessonPlaybackSuspended||view!=='library'||!playingLesson||lid!==playingLesson)return Promise.resolve();if(videoMode){youtube?.playVideo?.();return Promise.resolve();}return player.play();}
+function playMedia(){if(document.hidden||lessonPlaybackSuspended||view!=='library'||!playingLesson||lid!==playingLesson)return Promise.resolve();if(videoMode){youtube?.playVideo?.();return Promise.resolve();}const version=lessonPlaybackVersion;return playAudioElement(player,()=>version===lessonPlaybackVersion&&!document.hidden&&!lessonPlaybackSuspended&&view==='library'&&lid===playingLesson);}
 function seekMedia(n){if(videoMode)youtube?.seekTo?.(Math.max(0,n),true);else player.currentTime=Math.max(0,n);}
 async function youtubeAPI(){if(window.YT?.Player)return;if(!youtubePromise)youtubePromise=new Promise((resolve,reject)=>{const timer=setTimeout(()=>{youtubePromise=null;reject(Error('YouTube could not load. Turn off original-video playback in Settings to use local Harri speech.'));},15000);window.onYouTubeIframeAPIReady=()=>{clearTimeout(timer);resolve();};const script=document.createElement('script');script.src='https://www.youtube.com/iframe_api';script.onerror=()=>{clearTimeout(timer);youtubePromise=null;reject(Error('YouTube is unavailable. Use local speech instead.'));};document.head.append(script);});await youtubePromise;}
 async function startVideo(lesson,version){
@@ -241,7 +270,24 @@ async function startVideo(lesson,version){
   }});
  });
 }
-let pronunciation=null;
+const pronunciation=new Audio();
+function clearAudioPlaybackPrompt(){document.getElementById('audio-playback-prompt')?.remove();}
+function playAudioElement(audio,isCurrent=()=>true){
+ return OmaAudio.play(audio,{isCurrent,onBlocked:retry=>{
+  clearAudioPlaybackPrompt();
+  const box=document.createElement('section');box.id='audio-playback-prompt';box.setAttribute('role','status');
+  box.style.cssText='position:fixed;z-index:10000;left:16px;right:16px;bottom:calc(90px + env(safe-area-inset-bottom));max-width:390px;margin:auto;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--focused-panel,#fff);color:var(--ink);box-shadow:0 8px 30px #0003';
+  box.innerHTML='<p style="margin:0 0 12px">Audio is ready. Tap to play.</p><div class="row wrap"><button class="primary" data-audio-retry>Play audio</button><button data-audio-dismiss>Dismiss</button></div>';
+  (document.querySelector('dialog[open]')||document.body).append(box);
+  box.querySelector('[data-audio-dismiss]').onclick=()=>box.remove();
+  box.querySelector('[data-audio-retry]').onclick=async()=>{
+   const button=box.querySelector('[data-audio-retry]');button.disabled=true;
+   try{await retry();box.remove();}
+   catch{box.querySelector('p').textContent='Audio could not start. Tap Play audio to try again.';button.disabled=false;}
+  };
+  audio.addEventListener('playing',()=>box.remove(),{once:true});
+ }});
+}
 let pronunciationRequest=0;
 function pauseBackgroundPlayback(){
  lessonPlaybackSuspended=true;
@@ -253,22 +299,25 @@ function pauseBackgroundPlayback(){
  save();
 }
 async function speak(text){
+ clearAudioPlaybackPrompt();
  const request=++pronunciationRequest;
  if(pronunciation){pronunciation.onended=null;pronunciation.pause();}
  const resume=mediaPlaying();pauseMedia();
+ OmaAudio.prime(pronunciation);
  const rate=Number(s.settings.rate)||1;
  const r=await api('/api/tts',{text:text.slice(0,20000),speed:rate});
  if(request!==pronunciationRequest)return;
- pronunciation=new Audio(languageURL(r.url));
+ pronunciation.src=languageURL(r.url);
  pronunciation.generatedRate=r.nativeRate||1;
  pronunciation.defaultPlaybackRate=rate/pronunciation.generatedRate;
  pronunciation.playbackRate=rate/pronunciation.generatedRate;
  pronunciation.preservesPitch=true;
  pronunciation.onended=()=>{if(request===pronunciationRequest&&resume)playMedia().catch(e=>toast(e.message));};
- await pronunciation.play();
+ await playAudioElement(pronunciation,()=>request===pronunciationRequest&&!document.hidden);
 }
 
 function stopLessonPlayback(){
+ clearAudioPlaybackPrompt();
  ++lessonPlaybackVersion;
  ++pronunciationRequest;
  player.paceRequest=(player.paceRequest||0)+1;
@@ -297,6 +346,7 @@ async function playLesson(id,keepQueue=false){
  if(!lesson)throw Error('Lesson not found.');
  if(view!=='library'||lid!==id)openLesson(id);
  stopLessonPlayback();
+ OmaAudio.prime(player);
  const version=lessonPlaybackVersion;
  playingLesson=id;
  lessonPlaybackSuspended=false;
@@ -346,7 +396,7 @@ function syncPlaybackHighlight(){
  const mark=l.id+':'+rangeStart;if(mark!==lastPlaybackMark){lastPlaybackMark=mark;if(active&&mediaPlaying())followReaderPlayback(active,l,rangeStart);}
 }
 setInterval(syncPlaybackHighlight,250);
-function playerSetup(){installPlayerLabels();bind('player-play',async()=>{lessonPlaybackSuspended=false;if(view==='library'&&current()&&s.settings.sentenceMode&&!lessonQueuePlayback){if(mediaPlaying()&&playingLesson===lid)pauseMedia();else await playSelectedReaderSentence();return;}if((view==='library'&&current()&&current().id!==playingLesson)||(!player.src&&!videoMode)){const l=current()||s.lessons[0];if(l)await playLesson(l.id);}else if(!mediaPlaying())await playMedia();else pauseMedia();});bind('player-back',()=>seekMedia(mediaTime()-5));bind('player-forward',()=>{if(Number.isFinite(mediaDuration()))seekMedia(Math.min(mediaDuration(),mediaTime()+5));});bind('player-prev',async()=>{if(view==='library'&&current()){await navigateReaderSentence(-1);return;}if(clips.length&&clipIndex>0){clipIndex--;await loadClip();if(playingLesson)await player.play();}else if(queueIndex>0){queueIndex--;await playLesson(queue[queueIndex],true);}});bind('player-next',async()=>{if(view==='library'&&current()){await navigateReaderSentence(1);return;}if(clips.length&&clipIndex<clips.length-1){clipIndex++;await loadClip();if(playingLesson)await player.play();}else if(queueIndex<queue.length-1){queueIndex++;await playLesson(queue[queueIndex],true);}});bind('player-seek',()=>{if(Number.isFinite(mediaDuration()))seekReaderTimeline(Number($('#player-seek').value)/1000);},'input');bind('player-rate',()=>{setPlaybackSpeed($('#player-rate').value);},'change');bind('player-loop',()=>{player.loop=!player.loop;$('#player-loop').classList.toggle('active',player.loop);$('#player-loop').setAttribute('aria-pressed',String(player.loop));});bind('player-sleep',()=>modal('Sleep timer',`<input id="sleep-minutes" type="number" min="0" max="240" value="20"><p>Minutes until playback stops. Use 0 to cancel.</p>${button('sleep-save','Set timer','primary')}`,()=>bind('sleep-save',()=>{const n=Math.max(0,Math.min(240,Number($('#sleep-minutes').value)||0));sleepAt=n?Date.now()+n*60000:0;$('#dialog').close();toast(n?'Playback stops in '+n+' minutes.':'Sleep timer cancelled.');})));}
+function playerSetup(){installPlayerLabels();bind('player-play',async()=>{lessonPlaybackSuspended=false;if(view==='library'&&current()&&s.settings.sentenceMode&&!lessonQueuePlayback){if(mediaPlaying()&&playingLesson===lid)pauseMedia();else await playSelectedReaderSentence();return;}if((view==='library'&&current()&&current().id!==playingLesson)||(!player.src&&!videoMode)){const l=current()||s.lessons[0];if(l)await playLesson(l.id);}else if(!mediaPlaying())await playMedia();else pauseMedia();});bind('player-back',()=>seekMedia(mediaTime()-5));bind('player-forward',()=>{if(Number.isFinite(mediaDuration()))seekMedia(Math.min(mediaDuration(),mediaTime()+5));});bind('player-prev',async()=>{if(view==='library'&&current()){await navigateReaderSentence(-1);return;}if(clips.length&&clipIndex>0){clipIndex--;await loadClip();if(playingLesson)await playMedia();}else if(queueIndex>0){queueIndex--;await playLesson(queue[queueIndex],true);}});bind('player-next',async()=>{if(view==='library'&&current()){await navigateReaderSentence(1);return;}if(clips.length&&clipIndex<clips.length-1){clipIndex++;await loadClip();if(playingLesson)await playMedia();}else if(queueIndex<queue.length-1){queueIndex++;await playLesson(queue[queueIndex],true);}});bind('player-seek',()=>{if(Number.isFinite(mediaDuration()))seekReaderTimeline(Number($('#player-seek').value)/1000);},'input');bind('player-rate',()=>{setPlaybackSpeed($('#player-rate').value);},'change');bind('player-loop',()=>{player.loop=!player.loop;$('#player-loop').classList.toggle('active',player.loop);$('#player-loop').setAttribute('aria-pressed',String(player.loop));});bind('player-sleep',()=>modal('Sleep timer',`<input id="sleep-minutes" type="number" min="0" max="240" value="20"><p>Minutes until playback stops. Use 0 to cancel.</p>${button('sleep-save','Set timer','primary')}`,()=>bind('sleep-save',()=>{const n=Math.max(0,Math.min(240,Number($('#sleep-minutes').value)||0));sleepAt=n?Date.now()+n*60000:0;$('#dialog').close();toast(n?'Playback stops in '+n+' minutes.':'Sleep timer cancelled.');})));}
 function pickFile(accept,fn){const input=document.createElement('input');input.type='file';input.accept=accept;input.onchange=act(async()=>{if(input.files[0])await fn(input.files[0]);});input.click();}
 async function uploadAudio(file){const r=await languageFetch(base+'/api/media',{credentials:'include',method:'POST',headers:{'X-File-Name':encodeURIComponent(file.name)},body:file});if(!r.ok)throw Error((await r.json()).error);return r.json();}
 async function waitJob(id){for(;;){const j=await api('/api/jobs/'+id);if(j.status==='ready')return j.result;if(j.status==='failed')throw Error(j.error);if(j.progress){const status=$('#transcription-status')||$('#import-status')||$('#audio-import-status');if(status)status.textContent=j.progress;}await new Promise(r=>setTimeout(r,1800));}}
@@ -1197,7 +1247,7 @@ async function setPlaybackSpeed(value){
  if(!['ElevenLabs via OpenRouter','Piper'].includes(player.generatedProvider)||!clips.length||!playingLesson){applyPlaybackSpeed();return;}
  const lesson=playingLesson,index=clipIndex,wasPlaying=mediaPlaying(),fraction=Number.isFinite(player.duration)&&player.duration>0?player.currentTime/player.duration:0;
  const request=player.paceRequest=(player.paceRequest||0)+1;pauseMedia();$('#player-source').textContent='Preparing natural speech at '+rate+'×…';
- try{const r=await api('/api/tts',{text:clips[index].slice(0,20000),speed:rate});if(request!==player.paceRequest||playingLesson!==lesson||clipIndex!==index)return;player.generatedRate=r.nativeRate||1;player.generatedProvider=r.provider;player.addEventListener('loadedmetadata',()=>{if(request===player.paceRequest&&Number.isFinite(player.duration))player.currentTime=Math.min(fraction*player.duration,Math.max(0,player.duration-.01));},{once:true});player.src=languageURL(r.url);applyPlaybackSpeed();$('#player-source').textContent=r.provider+' · '+r.voice+' · natural '+(r.nativeRate||1)+'×';if(wasPlaying&&!lessonPlaybackSuspended)await player.play();}
+ try{const r=await api('/api/tts',{text:clips[index].slice(0,20000),speed:rate});if(request!==player.paceRequest||playingLesson!==lesson||clipIndex!==index)return;player.generatedRate=r.nativeRate||1;player.generatedProvider=r.provider;player.addEventListener('loadedmetadata',()=>{if(request===player.paceRequest&&Number.isFinite(player.duration))player.currentTime=Math.min(fraction*player.duration,Math.max(0,player.duration-.01));},{once:true});player.src=languageURL(r.url);applyPlaybackSpeed();$('#player-source').textContent=r.provider+' · '+r.voice+' · natural '+(r.nativeRate||1)+'×';if(wasPlaying&&!lessonPlaybackSuspended)await playMedia();}
  catch(e){applyPlaybackSpeed();throw e;}
 }
 function toggleReaderSentenceView(){
@@ -1395,7 +1445,7 @@ function aiConnectionSettings({embedded=false}={}){
   showVoice();bind('speech-provider',resetPreview,'change');bind('openrouter-voice',resetPreview,'change');
   const saveRouterKey=async()=>{const key=$('#openrouter-key').value.trim();if(key){await api('/api/openrouter/config',{apiKey:key});$('#openrouter-key').value='';router.keyConfigured=true;}};
   bind('connections-save',async()=>{const button=$('#connections-save');button.disabled=true;status('Saving…');try{const provider=$('#speech-provider').value,voice=$('#openrouter-voice').value;if(provider==='openrouter'&&!voice)throw Error('Choose a narrator voice first.');await saveRouterKey();if(provider==='openrouter')await api('/api/openrouter/config',{voice});const key=$('#openai-key').value.trim(),model=$('#openai-model').value.trim();await api('/api/openai/config',{...(key?{apiKey:key}:{}),model,speechProvider:provider,speechVoice:$('#speech-voice').value,enabled:ai.enabled||$('#ai-provider').value==='openai'||provider==='openai'});$('#openai-key').value='';s.settings.aiProvider=$('#ai-provider').value;s.settings.openaiModel=model;s.settings.translationProvider=$('#translation-provider').value;s.settings.ollamaModel=$('#ollama-model').value.trim();s.settings.whisperModel=$('#whisper-model').value;save();status('Saved. '+(provider==='openrouter'?'ElevenLabs · '+title(voice):provider==='openai'?'OpenAI · '+title($('#speech-voice').value):'Piper Harri')+' is selected for generated speech.');}catch(e){status(e.message);}finally{button.disabled=false;}});
-  bind('preview-eleven',async()=>{const button=$('#preview-eleven'),voice=$('#openrouter-voice').value,sequence=++previewSequence;const stillCurrent=()=>sequence===previewSequence&&button.isConnected&&dialog.isConnected&&view==='settings'&&settingsTab==='connections'&&$('#openrouter-voice')?.value===voice;button.disabled=true;button.textContent='Preparing '+title(voice)+'…';pauseMedia();if(pronunciation)pronunciation.pause();status('Preparing '+title(voice)+' in '+learningLanguage().name+'…');try{await saveRouterKey();const r=await api('/api/openrouter/preview',{voice,speed:s.settings.rate});if(!stillCurrent())return;if(r.voice!==voice)throw Error('The preview returned another narrator. Please try again.');const audio=$('#voice-preview');audio.pause();audio.src=languageURL(r.url);audio.dataset.voice=voice;audio.setAttribute('aria-label',title(voice)+' · '+learningLanguage().name+' voice preview');audio.load();audio.hidden=false;audio.playbackRate=(Number(s.settings.rate)||.85)/(r.nativeRate||1);await audio.play();if(stillCurrent())status('Playing '+title(voice)+'. Choose Save settings to use this narrator.');}catch(e){if(stillCurrent())status(e.message);}finally{if(stillCurrent())showVoice();}});
+  bind('preview-eleven',async()=>{OmaAudio.prime($('#voice-preview'));const button=$('#preview-eleven'),voice=$('#openrouter-voice').value,sequence=++previewSequence;const stillCurrent=()=>sequence===previewSequence&&button.isConnected&&dialog.isConnected&&view==='settings'&&settingsTab==='connections'&&$('#openrouter-voice')?.value===voice;button.disabled=true;button.textContent='Preparing '+title(voice)+'…';pauseMedia();if(pronunciation)pronunciation.pause();status('Preparing '+title(voice)+' in '+learningLanguage().name+'…');try{await saveRouterKey();const r=await api('/api/openrouter/preview',{voice,speed:s.settings.rate});if(!stillCurrent())return;if(r.voice!==voice)throw Error('The preview returned another narrator. Please try again.');const audio=$('#voice-preview');audio.pause();audio.src=languageURL(r.url);audio.dataset.voice=voice;audio.setAttribute('aria-label',title(voice)+' · '+learningLanguage().name+' voice preview');audio.load();audio.hidden=false;audio.playbackRate=(Number(s.settings.rate)||.85)/(r.nativeRate||1);const started=await playAudioElement(audio,stillCurrent);if(stillCurrent())status(started?'Playing '+title(voice)+'. Choose Save settings to use this narrator.':'Audio is ready. Tap Play audio to hear this narrator.');}catch(e){if(stillCurrent())status(e.message);}finally{if(stillCurrent())showVoice();}});
   for(const provider of ['openrouter','openai']){
    bind(provider+'-test',async()=>{try{if(provider==='openrouter')await saveRouterKey();const r=await api('/api/'+provider+'/test',{});status(r.message||'Connection works.');}catch(e){status(e.message);}});
    bind(provider+'-forget',async()=>{try{await api('/api/'+provider+'/config',undefined,'DELETE');$('#'+provider+'-key').value='';const summary=$('#'+provider+'-key').closest('details')?.querySelector('summary span');if(summary)summary.textContent='Not connected';if(provider==='openai')ai.keyConfigured=false;else router.keyConfigured=false;status(title(provider)+' key removed.');}catch(e){status(e.message);}});
@@ -1548,7 +1598,7 @@ const settingsTabId=key=>'settings-'+(key==='connections'?'ai':key)+'-tab';
 function settingsShell(){
  $('#voice-preview')?.pause();
  const sections=settingsSections();
- $('#main').innerHTML=`<section class="settings-page"><h1>Settings</h1><div class="settings-page-tabs" role="tablist" aria-label="Settings sections">${sections.map(([key,label])=>`<button id="${settingsTabId(key)}" role="tab" aria-selected="${settingsTab===key}" aria-controls="settings-content" class="${settingsTab===key?'active':''}">${label}</button>`).join('')}</div><section id="settings-content" role="tabpanel" aria-labelledby="${settingsTabId(settingsTab)}"></section></section>`;
+ $('#main').innerHTML=`<section class="settings-page"><h1>Settings <small class="settings-version" style="font-size:14px;font-weight:400;color:var(--muted);white-space:nowrap">v${E(OMA_RELEASE_VERSION)}</small></h1><div class="settings-page-tabs" role="tablist" aria-label="Settings sections">${sections.map(([key,label])=>`<button id="${settingsTabId(key)}" role="tab" aria-selected="${settingsTab===key}" aria-controls="settings-content" class="${settingsTab===key?'active':''}">${label}</button>`).join('')}</div><section id="settings-content" role="tabpanel" aria-labelledby="${settingsTabId(settingsTab)}"></section></section>`;
  for(const [tab] of sections)bind(settingsTabId(tab),()=>{settingsTab=tab;settings();});
 }
 function settings(){
@@ -1687,6 +1737,7 @@ setupParityShell=function(){focusedSetupOriginal();document.body.classList.add('
  for(const [key,icon]of [['library','library'],['words','words']]){const button=branch.querySelector('[data-nav='+key+']');button.setAttribute('aria-label',key==='words'?'O/L Words':'Library');button.innerHTML=focusedIcon(icon)+'<span class="nav-label">'+(key==='words'?'O/L Words':'Library')+'</span>';}
  $('#create-menu').setAttribute('aria-label','Import content');$('#create-menu').innerHTML=focusedIcon('plus')+'<span class="nav-label">Import</span>';$('#create-menu').onclick=()=>importDialog();$('#brand-home').onclick=()=>focusedNavigate('discover');
  $('.sidebar-bottom').insertAdjacentHTML('beforeend',olReadingFox);
+ const version=document.createElement('small');version.className='app-version sidebar-version';version.textContent='v'+OMA_RELEASE_VERSION;version.setAttribute('aria-label',OMA_BRAND_NAME+' version '+OMA_RELEASE_VERSION);version.style.cssText='display:block;margin-top:auto;padding:16px 14px 20px;color:var(--muted);font-size:12px;line-height:1.2;align-self:flex-start;white-space:nowrap';document.querySelector('.app-sidebar').append(version);
  const mobileBrand=document.createElement('button');mobileBrand.id='focused-mobile-brand';mobileBrand.setAttribute('aria-label',OMA_BRAND_NAME+' home');mobileBrand.innerHTML=omaBrandMark+'<strong>'+OMA_BRAND_NAME+'</strong>';mobileBrand.onclick=()=>focusedNavigate('discover');$('header').prepend(mobileBrand);
 };
 const focusedNavigateOriginal=parityNavigate;

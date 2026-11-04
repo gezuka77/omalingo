@@ -14,7 +14,7 @@ RUN /opt/oma-python/bin/pip install --no-cache-dir --upgrade 'pip>=25,<27' \
     && npm install --no-save --package-lock=false --omit=dev --no-audit --no-fund ws@8 \
     && npm cache clean --force
 
-COPY *.cjs *.py app.js core.js source-catalog.js index.html languages.json retired-source-ids.json shared-source-seeds.json ./
+COPY *.cjs *.py app.js core.js source-catalog.js index.html languages.json retired-source-ids.json shared-source-seeds.json VERSION ./
 RUN install -d -o node -g node -m 0700 /var/lib/omalingo /var/lib/omalingo/credentials
 
 ENV HOME=/var/lib/omalingo \

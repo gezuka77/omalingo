@@ -10,3 +10,5 @@ launcher.cjs
 !languages.json
 !retired-source-ids.json
 !shared-source-seeds.json
+
+!VERSION

@@ -21,6 +21,14 @@ Leave that terminal open while setting up the account in your browser. The admin
 
 ## Use your domain
 
+Set your exact public HTTPS origin in the local `.env` file, then recreate the
+service. Replace the example with your own domain; do not commit the file.
+
+```dotenv
+OMA_PUBLIC_ORIGIN=https://learn.example.com
+```
+
+
 Configure your HTTPS reverse proxy or tunnel for `learn.example.com`. A proxy running directly on your server can forward to `http://127.0.0.1:3222`. Keep the request's public Host header. A Caddy site on your server can use this configuration.
 
 ```caddyfile

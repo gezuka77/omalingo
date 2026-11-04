@@ -79,7 +79,7 @@ const mediaTime=()=>videoMode?youtube?.getCurrentTime?.()||0:player.currentTime;
 const mediaDuration=()=>videoMode?youtube?.getDuration?.()||0:player.duration;
 const mediaPlaying=()=>videoMode?youtube?.getPlayerState?.()===1:!player.paused&&!player.ended;
 function pauseMedia(){if(videoMode)youtube?.pauseVideo?.();else player.pause();}
-function playMedia(){if(document.hidden||lessonPlaybackSuspended||view!=='library'||!playingLesson||lid!==playingLesson)return Promise.resolve();if(videoMode){youtube?.playVideo?.();return Promise.resolve();}return player.play();}
+function playMedia(){if(document.hidden||lessonPlaybackSuspended||view!=='library'||!playingLesson||lid!==playingLesson)return Promise.resolve();if(videoMode){youtube?.playVideo?.();return Promise.resolve();}const version=lessonPlaybackVersion;return playAudioElement(player,()=>version===lessonPlaybackVersion&&!document.hidden&&!lessonPlaybackSuspended&&view==='library'&&lid===playingLesson);}
 function seekMedia(n){if(videoMode)youtube?.seekTo?.(Math.max(0,n),true);else player.currentTime=Math.max(0,n);}
 async function youtubeAPI(){if(window.YT?.Player)return;if(!youtubePromise)youtubePromise=new Promise((resolve,reject)=>{const timer=setTimeout(()=>{youtubePromise=null;reject(Error('YouTube could not load. Turn off original-video playback in Settings to use local Harri speech.'));},15000);window.onYouTubeIframeAPIReady=()=>{clearTimeout(timer);resolve();};const script=document.createElement('script');script.src='https://www.youtube.com/iframe_api';script.onerror=()=>{clearTimeout(timer);youtubePromise=null;reject(Error('YouTube is unavailable. Use local speech instead.'));};document.head.append(script);});await youtubePromise;}
 async function startVideo(lesson,version){
@@ -117,7 +117,24 @@ async function startVideo(lesson,version){
   }});
  });
 }
-let pronunciation=null;
+const pronunciation=new Audio();
+function clearAudioPlaybackPrompt(){document.getElementById('audio-playback-prompt')?.remove();}
+function playAudioElement(audio,isCurrent=()=>true){
+ return OmaAudio.play(audio,{isCurrent,onBlocked:retry=>{
+  clearAudioPlaybackPrompt();
+  const box=document.createElement('section');box.id='audio-playback-prompt';box.setAttribute('role','status');
+  box.style.cssText='position:fixed;z-index:10000;left:16px;right:16px;bottom:calc(90px + env(safe-area-inset-bottom));max-width:390px;margin:auto;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--focused-panel,#fff);color:var(--ink);box-shadow:0 8px 30px #0003';
+  box.innerHTML='<p style="margin:0 0 12px">Audio is ready. Tap to play.</p><div class="row wrap"><button class="primary" data-audio-retry>Play audio</button><button data-audio-dismiss>Dismiss</button></div>';
+  (document.querySelector('dialog[open]')||document.body).append(box);
+  box.querySelector('[data-audio-dismiss]').onclick=()=>box.remove();
+  box.querySelector('[data-audio-retry]').onclick=async()=>{
+   const button=box.querySelector('[data-audio-retry]');button.disabled=true;
+   try{await retry();box.remove();}
+   catch{box.querySelector('p').textContent='Audio could not start. Tap Play audio to try again.';button.disabled=false;}
+  };
+  audio.addEventListener('playing',()=>box.remove(),{once:true});
+ }});
+}
 let pronunciationRequest=0;
 function pauseBackgroundPlayback(){
  lessonPlaybackSuspended=true;
@@ -129,22 +146,25 @@ function pauseBackgroundPlayback(){
  save();
 }
 async function speak(text){
+ clearAudioPlaybackPrompt();
  const request=++pronunciationRequest;
  if(pronunciation){pronunciation.onended=null;pronunciation.pause();}
  const resume=mediaPlaying();pauseMedia();
+ OmaAudio.prime(pronunciation);
  const rate=Number(s.settings.rate)||1;
  const r=await api('/api/tts',{text:text.slice(0,20000),speed:rate});
  if(request!==pronunciationRequest)return;
- pronunciation=new Audio(base+r.url);
+ pronunciation.src=base+r.url;
  pronunciation.generatedRate=r.nativeRate||1;
  pronunciation.defaultPlaybackRate=rate/pronunciation.generatedRate;
  pronunciation.playbackRate=rate/pronunciation.generatedRate;
  pronunciation.preservesPitch=true;
  pronunciation.onended=()=>{if(request===pronunciationRequest&&resume)playMedia().catch(e=>toast(e.message));};
- await pronunciation.play();
+ await playAudioElement(pronunciation,()=>request===pronunciationRequest&&!document.hidden);
 }
 
 function stopLessonPlayback(){
+ clearAudioPlaybackPrompt();
  ++lessonPlaybackVersion;
  ++pronunciationRequest;
  player.paceRequest=(player.paceRequest||0)+1;
@@ -173,6 +193,7 @@ async function playLesson(id,keepQueue=false){
  if(!lesson)throw Error('Lesson not found.');
  if(view!=='library'||lid!==id)openLesson(id);
  stopLessonPlayback();
+ OmaAudio.prime(player);
  const version=lessonPlaybackVersion;
  playingLesson=id;
  lessonPlaybackSuspended=false;
@@ -222,7 +243,7 @@ function syncPlaybackHighlight(){
  const mark=l.id+':'+rangeStart;if(mark!==lastPlaybackMark){lastPlaybackMark=mark;if(active&&mediaPlaying())followReaderPlayback(active,l,rangeStart);}
 }
 setInterval(syncPlaybackHighlight,250);
-function playerSetup(){installPlayerLabels();bind('player-play',async()=>{lessonPlaybackSuspended=false;if(view==='library'&&current()&&s.settings.sentenceMode&&!lessonQueuePlayback){if(mediaPlaying()&&playingLesson===lid)pauseMedia();else await playSelectedReaderSentence();return;}if((view==='library'&&current()&&current().id!==playingLesson)||(!player.src&&!videoMode)){const l=current()||s.lessons[0];if(l)await playLesson(l.id);}else if(!mediaPlaying())await playMedia();else pauseMedia();});bind('player-back',()=>seekMedia(mediaTime()-5));bind('player-forward',()=>{if(Number.isFinite(mediaDuration()))seekMedia(Math.min(mediaDuration(),mediaTime()+5));});bind('player-prev',async()=>{if(view==='library'&&current()){await navigateReaderSentence(-1);return;}if(clips.length&&clipIndex>0){clipIndex--;await loadClip();if(playingLesson)await player.play();}else if(queueIndex>0){queueIndex--;await playLesson(queue[queueIndex],true);}});bind('player-next',async()=>{if(view==='library'&&current()){await navigateReaderSentence(1);return;}if(clips.length&&clipIndex<clips.length-1){clipIndex++;await loadClip();if(playingLesson)await player.play();}else if(queueIndex<queue.length-1){queueIndex++;await playLesson(queue[queueIndex],true);}});bind('player-seek',()=>{if(Number.isFinite(mediaDuration()))seekReaderTimeline(Number($('#player-seek').value)/1000);},'input');bind('player-rate',()=>{setPlaybackSpeed($('#player-rate').value);},'change');bind('player-loop',()=>{player.loop=!player.loop;$('#player-loop').classList.toggle('active',player.loop);$('#player-loop').setAttribute('aria-pressed',String(player.loop));});bind('player-sleep',()=>modal('Sleep timer',`<input id="sleep-minutes" type="number" min="0" max="240" value="20"><p>Minutes until playback stops. Use 0 to cancel.</p>${button('sleep-save','Set timer','primary')}`,()=>bind('sleep-save',()=>{const n=Math.max(0,Math.min(240,Number($('#sleep-minutes').value)||0));sleepAt=n?Date.now()+n*60000:0;$('#dialog').close();toast(n?'Playback stops in '+n+' minutes.':'Sleep timer cancelled.');})));}
+function playerSetup(){installPlayerLabels();bind('player-play',async()=>{lessonPlaybackSuspended=false;if(view==='library'&&current()&&s.settings.sentenceMode&&!lessonQueuePlayback){if(mediaPlaying()&&playingLesson===lid)pauseMedia();else await playSelectedReaderSentence();return;}if((view==='library'&&current()&&current().id!==playingLesson)||(!player.src&&!videoMode)){const l=current()||s.lessons[0];if(l)await playLesson(l.id);}else if(!mediaPlaying())await playMedia();else pauseMedia();});bind('player-back',()=>seekMedia(mediaTime()-5));bind('player-forward',()=>{if(Number.isFinite(mediaDuration()))seekMedia(Math.min(mediaDuration(),mediaTime()+5));});bind('player-prev',async()=>{if(view==='library'&&current()){await navigateReaderSentence(-1);return;}if(clips.length&&clipIndex>0){clipIndex--;await loadClip();if(playingLesson)await playMedia();}else if(queueIndex>0){queueIndex--;await playLesson(queue[queueIndex],true);}});bind('player-next',async()=>{if(view==='library'&&current()){await navigateReaderSentence(1);return;}if(clips.length&&clipIndex<clips.length-1){clipIndex++;await loadClip();if(playingLesson)await playMedia();}else if(queueIndex<queue.length-1){queueIndex++;await playLesson(queue[queueIndex],true);}});bind('player-seek',()=>{if(Number.isFinite(mediaDuration()))seekReaderTimeline(Number($('#player-seek').value)/1000);},'input');bind('player-rate',()=>{setPlaybackSpeed($('#player-rate').value);},'change');bind('player-loop',()=>{player.loop=!player.loop;$('#player-loop').classList.toggle('active',player.loop);$('#player-loop').setAttribute('aria-pressed',String(player.loop));});bind('player-sleep',()=>modal('Sleep timer',`<input id="sleep-minutes" type="number" min="0" max="240" value="20"><p>Minutes until playback stops. Use 0 to cancel.</p>${button('sleep-save','Set timer','primary')}`,()=>bind('sleep-save',()=>{const n=Math.max(0,Math.min(240,Number($('#sleep-minutes').value)||0));sleepAt=n?Date.now()+n*60000:0;$('#dialog').close();toast(n?'Playback stops in '+n+' minutes.':'Sleep timer cancelled.');})));}
 function pickFile(accept,fn){const input=document.createElement('input');input.type='file';input.accept=accept;input.onchange=act(async()=>{if(input.files[0])await fn(input.files[0]);});input.click();}
 async function uploadAudio(file){const r=await fetch(base+'/api/media',{credentials:'include',method:'POST',headers:{'X-File-Name':encodeURIComponent(file.name)},body:file});if(!r.ok)throw Error((await r.json()).error);return r.json();}
 async function waitJob(id){for(;;){const j=await api('/api/jobs/'+id);if(j.status==='ready')return j.result;if(j.status==='failed')throw Error(j.error);if(j.progress){const status=$('#transcription-status')||$('#import-status')||$('#audio-import-status');if(status)status.textContent=j.progress;}await new Promise(r=>setTimeout(r,1800));}}
