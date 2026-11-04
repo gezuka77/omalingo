@@ -82,7 +82,7 @@ async function restartOpenLesson(){
  const lesson=(view==='library'&&current())||s.lessons.find(l=>l.id===playingLesson);if(!lesson)return;
  const resume=mediaPlaying()&&playingLesson===lesson.id;if(playingLesson===lesson.id)pauseMedia();pronunciation?.pause();readerSentenceRange=null;chosen='';anchor=null;s.positions[lesson.id]=0;s.audioPositions[lesson.id]=0;save();
  if(playingLesson===lesson.id){if(clips.length){clipIndex=0;await loadClip();}else seekMedia(0);}
- if(view==='library'&&current()?.id===lesson.id){reader(lesson);const article=$('#reader-text')?.closest('article');if(article)article.scrollTop=0;}
+ if(view==='library'&&current()?.id===lesson.id){reader(lesson);const article=$('#reader-text')?.closest('article');if(article)article.scrollTop=0;syncPlaybackHighlight();}
  if(resume&&playingLesson===lesson.id)await playMedia();
 }
 function installAuditedReaderControls(){
