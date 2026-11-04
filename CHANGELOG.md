@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-11-04
+
+### Fixed
+
+- Reuse the pronunciation audio element and prepare playback during the user's tap before waiting for generated speech, improving iPhone browser playback.
+- Show a clear **Play audio** action when the browser blocks delayed playback, without interrupting editing dialogs or losing prepared speech.
+- Ignore stale playback requests after switching words or lessons and preserve desktop playback behavior.
+
 ## [0.2.0] - 2026-11-04
 
 ### Added

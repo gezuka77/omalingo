@@ -60,6 +60,7 @@ def javascript(brand_svg):
 
     return "\n".join((
         read(ROOT / "core.js"),
+        read(FRONTEND / "audio-playback.js"),
         read(FRONTEND / "dictionary-resources.js"),
         read(ROOT / "source-catalog.js"),
         read(FRONTEND / "seed-data.js").removesuffix("\n"),
