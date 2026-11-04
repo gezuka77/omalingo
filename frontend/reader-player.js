@@ -66,7 +66,7 @@ function syncLocalSpeechFollow(){
  const offset=s.settings.sentenceMode?part.start+l.text.slice(part.start,part.end).indexOf(part.text):0;
  const root=$('#reader-text'),mark=l.id+':'+clipIndex+':'+s.settings.sentenceMode;let active=syncLocalSpeechFollow.active;
  if(syncLocalSpeechFollow.root!==root||syncLocalSpeechFollow.mark!==mark||!active?.isConnected){
- active=null;for(const el of $$('#reader-text .token')){const start=Number(el.dataset.start)+offset,end=Number(el.dataset.end)+offset;const on=start<part.end&&end>part.start;el.classList.toggle('sounding',on);if(on&&(!active||!active.isConnected||!active.classList.contains('sounding')))active=el;}
+ active=null;for(const el of $$('#reader-text .token')){const start=Number(el.dataset.start)+offset,end=Number(el.dataset.end)+offset;const on=start<part.end&&end>part.start;el.classList.toggle('sounding',on);if(on&&!active)active=el;}
  syncLocalSpeechFollow.root=root;syncLocalSpeechFollow.mark=mark;syncLocalSpeechFollow.active=active;
  }
  if(active&&!player.paused)followReaderPlayback(active,l,part.start);
