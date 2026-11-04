@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: read
+  contents: write
   packages: write
 
 jobs:
@@ -88,3 +88,21 @@ jobs:
             docker push "$tag"
           fi
           docker push "$image:latest"
+
+      - name: Publish numbered GitHub release notes
+        if: inputs.release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IMAGE_VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          python3 - <<'PYNOTES' > "$RUNNER_TEMP/release-notes.md"
+          import os
+          from pathlib import Path
+          text = Path('CHANGELOG.md').read_text()
+          version = os.environ['IMAGE_VERSION']
+          section = text.split('## [' + version + ']', 1)[1].split('\n', 1)[1]
+          print(section.split('\n## [', 1)[0].strip())
+          PYNOTES
+          gh release create "v$IMAGE_VERSION" --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" --title "Oma Lingo v$IMAGE_VERSION" \
+            --notes-file "$RUNNER_TEMP/release-notes.md"

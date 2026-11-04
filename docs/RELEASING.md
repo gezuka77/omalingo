@@ -13,7 +13,7 @@ You can start the same manual build from GitHub CLI.
 gh workflow run docker.yml --repo gezuka77/omalingo --ref main -f release=true
 ```
 
-The workflow checks the frontend bundle and runs the account tests before building a Linux x86-64 image. The numbered publish step refuses to reuse an existing version tag.
+The workflow checks the frontend bundle and runs the account tests before building a Linux x86-64 image. The numbered publish step refuses to reuse an existing version tag. After the image push succeeds, it creates the matching GitHub Release and publishes that version’s CHANGELOG.md notes. An unnumbered image build does not create a release.
 
 ## Image tags
 
