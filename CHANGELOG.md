@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.2 — 2026-11-04
+
+### Fixed
+
+- Preserve the page reader between generated speech sentences to prevent mobile scroll jumps.
+- Keep visible text stable during audio follow and let touch or wheel scrolling take priority.
+- Restore the active generated-speech sentence highlight from the beginning and after reader redraws.
+
 ## [Unreleased]
 
 ## [0.2.1] - 2026-11-04

@@ -146,7 +146,7 @@ if(typeof module!=='undefined'&&module.exports)module.exports=root.OmaSourceCata
 const demo=[{id:'morning',title:'A quiet morning in Helsinki',subtitle:'Arki Helsingissä',icon:'☕',text:'Aamulla kaupunki on hiljainen. Minä kävelen pieneen kahvilaan. Tilaan kahvin ja tuoreen leivän. Ikkunan takana sataa vähän vettä. Tänään minulla ei ole kiire. Istun hetken ja katson ihmisiä. Sitten lähden kirjastoon. Haluan löytää uuden kirjan.',translation:'In the morning the city is quiet. I walk to a small café. I order coffee and fresh bread. Outside the window it is raining a little. Today I am not in a hurry. I sit for a moment and watch people. Then I leave for the library. I want to find a new book.',created:1},{id:'forest',title:'An afternoon in the forest',subtitle:'Pieni retki',icon:'🌲',text:'Lauantaina menemme metsään. Ilma on viileä ja aurinko paistaa. Polun vieressä kasvaa paljon puita. Kuuntelemme lintuja ja kävelemme hitaasti. Järven rannalla pidämme tauon. Minulla on mukana teetä ja voileipiä. Täällä on hyvä olla.',translation:'On Saturday we go to the forest. The air is cool and the sun is shining. Many trees grow beside the path. We listen to birds and walk slowly. We take a break by the lake. I have tea and sandwiches with me. It feels good to be here.',created:2}];
 const dictionary={aamulla:'in the morning',kaupunki:'city',on:'is',hiljainen:'quiet',minä:'I',kävelen:'I walk',pieneen:'into a small',kahvilaan:'to a café',tilaan:'I order',kahvin:'a coffee',ja:'and',tuoreen:'fresh',leivän:'bread',ikkunan:'of the window',takana:'behind / outside',sataa:'it rains',vähän:'a little',vettä:'water',tänään:'today',minulla:'I have / for me',ei:'not',ole:'be',kiire:'hurry',istun:'I sit',hetken:'a moment',katson:'I watch',ihmisiä:'people',sitten:'then',lähden:'I leave',kirjastoon:'to the library',haluan:'I want',löytää:'to find',uuden:'new',kirjan:'a book',lauantaina:'on Saturday',menemme:'we go',metsään:'into the forest',ilma:'air / weather',viileä:'cool',aurinko:'sun',paistaa:'shines',polun:'of the path',vieressä:'beside',kasvaa:'grows',paljon:'a lot',puita:'trees',kuuntelemme:'we listen',lintuja:'birds',kävelemme:'we walk',hitaasti:'slowly',järven:'of the lake',rannalla:'on the shore',pidämme:'we take / hold',tauon:'a break',mukana:'with / along',teetä:'tea',voileipiä:'sandwiches',täällä:'here',hyvä:'good',olla:'to be'};
 const OMA_BRAND_NAME="Oma Lingo";
-const OMA_RELEASE_VERSION="0.2.1";
+const OMA_RELEASE_VERSION="0.2.2";
 const OMA_SHORT_NAME="O/L";
 const omaBrandMark="<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" class=\"oma-lettermark\" aria-hidden=\"true\" focusable=\"false\">\n  <rect class=\"lettermark-tile\" width=\"64\" height=\"64\" rx=\"18\" fill=\"#224a3a\"/>\n  <circle class=\"lettermark-o\" cx=\"26.6\" cy=\"28.5\" r=\"10.7\" fill=\"none\" stroke=\"#c6edda\" stroke-width=\"6.1\"/>\n  <path class=\"lettermark-l\" d=\"M39 25v16.5a4 4 0 0 0 4 4h9.5\" fill=\"none\" stroke=\"#83c1a7\" stroke-width=\"6.4\"/>\n</svg>";
 const olReadingFox="<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ol-reading-fox\" viewBox=\"0 0 88 88\" aria-hidden=\"true\" focusable=\"false\">\n  <ellipse cx=\"44\" cy=\"77\" rx=\"32\" ry=\"4\" fill=\"#739181\" opacity=\".22\"/>\n  <path d=\"M54 63c9-1 14-7 17-15 8 5 12 12 10 19-3 11-16 15-28 9z\" fill=\"#ac644d\"/>\n  <path d=\"M71 48c7 4 11 9 11 15-5 1-9 0-13-4l-4 1c3-3 5-7 6-12z\" fill=\"#f0d8b7\"/>\n  <path d=\"M26 73c-2-12 3-23 15-26 14-3 24 6 23 20l-3 7z\" fill=\"#ba7357\"/>\n  <path d=\"M20 34 19 11c8 1 16 6 21 13m7 0c5-7 12-12 21-14l-2 24\" fill=\"#b36c52\" stroke=\"#b36c52\" stroke-width=\"3\" stroke-linejoin=\"round\"/>\n  <path d=\"m24 18 11 9-10 4zm38-1-11 10 10 4z\" fill=\"#efbd9c\"/>\n  <path d=\"M15 40c1-11 13-19 28-19 16 0 29 8 30 19-7 11-18 17-29 17-12 0-23-6-29-17z\" fill=\"#d98f68\"/>\n  <path d=\"M15 40c10-5 20 0 29 9 10-9 20-14 29-9-7 11-18 17-29 17-12 0-23-6-29-17z\" fill=\"#f0d8b7\"/>\n  <path d=\"M27 37c2 2 5 3 8 2m18 0c3 1 6 0 8-2\" fill=\"none\" stroke=\"#4c3832\" stroke-width=\"2.1\" stroke-linecap=\"round\"/>\n  <path d=\"M40 47q4-3 8 0-1 4-4 4t-4-4z\" fill=\"#4c3832\"/>\n  <path d=\"M23 56c8-3 15-2 21 2 6-4 13-5 21-2v8H23z\" fill=\"#f0e9d5\"/>\n  <path d=\"M21 58c9-2 17-1 23 3 6-4 14-5 23-3v17c-9-2-17-1-23 3-6-4-14-5-23-3z\" fill=\"#39705b\"/>\n  <path d=\"M44 72v5\" fill=\"none\" stroke=\"#629581\" stroke-width=\"1.4\"/>\n  <g fill=\"none\" stroke=\"#d5efe1\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n    <ellipse cx=\"33.5\" cy=\"65.5\" rx=\"4\" ry=\"4.5\"/>\n    <path d=\"m41 70 6-9m5 0v9h6\"/>\n  </g>\n  <ellipse cx=\"23\" cy=\"64\" rx=\"3.3\" ry=\"4\" fill=\"#ca8663\"/>\n  <ellipse cx=\"65\" cy=\"64\" rx=\"3.3\" ry=\"4\" fill=\"#ca8663\"/>\n</svg>";
@@ -376,7 +376,7 @@ async function playLesson(id,keepQueue=false){
  applyPlaybackSpeed();
  await playMedia();
 }
-async function loadClip(){const version=lessonPlaybackVersion,index=clipIndex;const r=await api('/api/tts',{text:clips[index].slice(0,20000),speed:s.settings.rate});if(version!==lessonPlaybackVersion||clipIndex!==index)return;player.generatedRate=r.nativeRate||1;player.generatedProvider=r.provider;player.src=languageURL(r.url);applyPlaybackSpeed();$('#player-source').textContent=`${r.provider||'Piper'} · ${r.voice||'Harri'} · AI voice · sentence ${clipIndex+1}/${clips.length}`;if(playingLesson===lid){s.positions[lid]=clipIndex;if(view==='library'){reader(current());const part=C.segments(current().text)[clipIndex];$$('.token').forEach(el=>{if(s.settings.sentenceMode||mInside(part,Number(el.dataset.start)))el.classList.add('sounding');});const active=$('#reader-text .sounding');if(active)followReaderPlayback(active,current(),part?.start||0);}}}
+async function loadClip(){const version=lessonPlaybackVersion,index=clipIndex;const r=await api('/api/tts',{text:clips[index].slice(0,20000),speed:s.settings.rate});if(version!==lessonPlaybackVersion||clipIndex!==index)return;player.generatedRate=r.nativeRate||1;player.generatedProvider=r.provider;player.src=languageURL(r.url);applyPlaybackSpeed();$('#player-source').textContent=`${r.provider||'Piper'} · ${r.voice||'Harri'} · AI voice · sentence ${clipIndex+1}/${clips.length}`;if(playingLesson===lid){s.positions[lid]=clipIndex;if(view==='library'){if(s.settings.sentenceMode||!$('#reader-text'))reader(current());const progress=$('.reading-progress i');if(progress)progress.style.width=(100*(clipIndex+1)/clips.length)+'%';const part=C.segments(current().text)[clipIndex];$$('.token').forEach(el=>{if(s.settings.sentenceMode||mInside(part,Number(el.dataset.start)))el.classList.add('sounding');});const active=$('#reader-text .sounding');if(active)followReaderPlayback(active,current(),part?.start||0);}}}
 player.onended=act(async()=>{if(player.loop||lessonPlaybackSuspended||!playingLesson||view!=='library'||playingLesson!==lid)return;const version=lessonPlaybackVersion;if(!lessonQueuePlayback&&s.settings.sentenceMode){pauseMedia();return;}if(playingLesson&&!clips.length)s.audioPositions[playingLesson]=0;if(clips.length&&clipIndex<clips.length-1){clipIndex++;await loadClip();if(version===lessonPlaybackVersion)await playMedia();return;}if(continuous&&queueIndex<queue.length-1){queueIndex++;await playLesson(queue[queueIndex],true);}});
 player.onplay=()=>{if(document.hidden||lessonPlaybackSuspended||view!=='library'||!playingLesson||playingLesson!==lid){player.pause();return;}$('#player-play').textContent='Ⅱ';lastTick=Date.now();};player.onpause=()=>{$('#player-play').textContent='▶';save();};player.onerror=()=>toast('Audio could not be played. Reattach the file or restart O/L.');
 setInterval(()=>{if(!authReady||!$('#player-time'))return;const now=Date.now(),elapsed=Math.min(2,(now-lastTick)/1000);lastTick=now;if(mediaPlaying()){const recent=s.events.at(-1);if(recent?.kind==='listen'&&recent.lessonId===playingLesson&&now-recent.at<60000){recent.amount+=elapsed;recent.coins+=elapsed/12;}else C.event(s,'listen',elapsed,{lessonId:playingLesson});if(playingLesson)s.audioPositions[playingLesson]=mediaTime();if(sleepAt&&now>=sleepAt){pauseMedia();sleepAt=0;toast('Sleep timer finished.');}const l=s.lessons.find(l=>l.id===playingLesson);if(Math.floor(now/1000)%15===0)save();}$('#player-time').textContent=playingLesson?(clips.length?'Sentence '+(clipIndex+1)+'/'+clips.length+' · ':'')+time(readerTimelineTime())+' / '+time(readerTimelineDuration()):'Ready to play';$('#player-seek').value=Number.isFinite(readerTimelineDuration())&&readerTimelineDuration()?readerTimelineTime()/readerTimelineDuration()*1000:0;},1000);
@@ -1199,22 +1199,29 @@ function readerSourceHeader(l){
  const summary=String(l.sourceSummary||l.description||'').trim();
  return `<div class="reader-source-art">${image?`<img src="${E(image)}" alt="" referrerpolicy="no-referrer">`:'<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M10 15c8-2 15 0 22 5 7-5 14-7 22-5v34c-8-2-15 0-22 5-7-5-14-7-22-5Z M32 20v34" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>'}</div><div class="reader-source-copy"><div class="reader-source-publisher">${E(publisher)}</div><h1>${E(l.title)}</h1><div class="reader-source-facts"><span>${E(learningLanguage().name)}</span><span>${count.toLocaleString()} words</span><span>${duration?time(duration)+' audio':'About '+Math.max(1,Math.ceil(count/180))+' min read'}</span>${l.level?`<span>${E(l.level)}</span>`:''}</div>${summary?`<p class="reader-source-summary">${E(summary.slice(0,300))}${summary.length>300?'…':''}</p>`:''}${source&&source!=='#'?`<a class="reader-source-link" href="${E(source)}" target="_blank" rel="noopener noreferrer">Original source ↗</a>`:''}</div>`;
 }
+let readerManualScrollUntil=0;
+const readerFollowState=new WeakMap();
+for(const event of ['touchstart','touchmove','wheel','pointerdown'])document.addEventListener(event,e=>{
+ if(e.target.closest?.('.reader-grid>article'))readerManualScrollUntil=performance.now()+3500;
+},{passive:true,capture:true});
 function followReaderPlayback(active,lesson,charStart){
- const article=active.closest('.reader-grid>article');if(!article)return;
- const parts=C.segments(lesson.text),index=Math.max(0,parts.findIndex(p=>mInside(p,charStart)));
- let upcoming=active;
- if(!s.settings.sentenceMode){const next=parts[Math.min(parts.length-1,index+3)];if(next){const candidates=[...article.querySelectorAll('#reader-text .token')];upcoming=candidates.find(el=>Number(el.dataset.start)>=next.start)||active;}}
- const rect=active.getBoundingClientRect(),nextRect=upcoming.getBoundingClientRect();
- const internal=article.scrollHeight>article.clientHeight+2;
- const bounds=internal?article.getBoundingClientRect():{top:0,bottom:innerHeight-115,height:innerHeight-115};
- const height=bounds.bottom-bounds.top,readingLine=bounds.top+height*.3;
- // Move at paragraph/sentence lead-in, leaving room for unread sentences.
- if(rect.top>bounds.top+height*.42||rect.top<bounds.top+28||nextRect.bottom>bounds.bottom-48){
-  const delta=rect.top-readingLine;
-  if(Math.abs(delta)<24)return;
-  if(internal)article.scrollTo({top:Math.max(0,article.scrollTop+delta),left:0,behavior:'smooth'});
-  else window.scrollBy({top:delta,left:0,behavior:'smooth'});
- }
+ const article=active.closest('.reader-grid>article');if(!article||performance.now()<readerManualScrollUntil)return;
+ const now=performance.now(),previous=readerFollowState.get(article);
+ if(previous&&now-previous.at<800)return;
+ const rect=active.getBoundingClientRect(),internal=article.scrollHeight>article.clientHeight+2;
+ const bounds=internal?article.getBoundingClientRect():{top:0,bottom:innerHeight-115};
+ const height=bounds.bottom-bounds.top;
+ // Keep a stable reading window instead of repeatedly recentering visible text.
+ if(rect.top>=bounds.top+24&&rect.bottom<=bounds.bottom-48)return;
+ const delta=rect.top-(bounds.top+height*.3);
+ const current=internal?article.scrollTop:window.scrollY;
+ const limit=internal?article.scrollHeight-article.clientHeight:document.documentElement.scrollHeight-innerHeight;
+ const target=Math.max(0,Math.min(limit,current+delta));
+ if(Math.abs(target-current)<24)return;
+ readerFollowState.set(article,{at:now});
+ const behavior=matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth';
+ if(internal)article.scrollTo({top:target,left:0,behavior});
+ else window.scrollTo({top:target,left:0,behavior});
 }
 
 const readerSourceMetadata=new Map();
@@ -1290,14 +1297,16 @@ async function playSelectedReaderSentence(){
 setInterval(()=>{if(readerSentenceRange&&mediaPlaying()&&mediaTime()>=readerSentenceRange.end){if(player.loop)seekMedia(readerSentenceRange.start);else pauseMedia();}},100);
 
 function syncLocalSpeechFollow(){
- if(view!=='library'||playingLesson!==lid||!clips.length||player.paused||!Number.isFinite(player.duration)||player.duration<=0)return;
+ if(view!=='library'||playingLesson!==lid||!clips.length)return;
  const l=current(),part=C.segments(l?.text||'')[clipIndex];if(!l||!part)return;
- // Piper supplies a sentence clip without word timings. Use its progress only
- // to position the reading window; keep the whole spoken sentence highlighted.
- const progress=Math.min(.99,player.currentTime/player.duration),relative=Math.floor(part.text.length*progress);
- const offset=s.settings.sentenceMode?0:part.start+l.text.slice(part.start,part.end).indexOf(part.text);
- const tokens=$$('#reader-text .token');const target=tokens.find(el=>Number(el.dataset.end)>=offset+relative)||tokens.at(-1);
- if(target)followReaderPlayback(target,l,part.start+relative);
+ // Restore the sentence immediately, including time zero and after a redraw.
+ const offset=s.settings.sentenceMode?part.start+l.text.slice(part.start,part.end).indexOf(part.text):0;
+ const root=$('#reader-text'),mark=l.id+':'+clipIndex+':'+s.settings.sentenceMode;let active=syncLocalSpeechFollow.active;
+ if(syncLocalSpeechFollow.root!==root||syncLocalSpeechFollow.mark!==mark||!active?.isConnected){
+ active=null;for(const el of $$('#reader-text .token')){const start=Number(el.dataset.start)+offset,end=Number(el.dataset.end)+offset;const on=start<part.end&&end>part.start;el.classList.toggle('sounding',on);if(on&&!active)active=el;}
+ syncLocalSpeechFollow.root=root;syncLocalSpeechFollow.mark=mark;syncLocalSpeechFollow.active=active;
+ }
+ if(active&&!player.paused)followReaderPlayback(active,l,part.start);
 }
 
 function refreshSentenceVocabulary(){
@@ -1904,7 +1913,7 @@ async function restartOpenLesson(){
  const lesson=(view==='library'&&current())||s.lessons.find(l=>l.id===playingLesson);if(!lesson)return;
  const resume=mediaPlaying()&&playingLesson===lesson.id;if(playingLesson===lesson.id)pauseMedia();pronunciation?.pause();readerSentenceRange=null;chosen='';anchor=null;s.positions[lesson.id]=0;s.audioPositions[lesson.id]=0;save();
  if(playingLesson===lesson.id){if(clips.length){clipIndex=0;await loadClip();}else seekMedia(0);}
- if(view==='library'&&current()?.id===lesson.id){reader(lesson);const article=$('#reader-text')?.closest('article');if(article)article.scrollTop=0;}
+ if(view==='library'&&current()?.id===lesson.id){reader(lesson);const article=$('#reader-text')?.closest('article');if(article)article.scrollTop=0;syncPlaybackHighlight();}
  if(resume&&playingLesson===lesson.id)await playMedia();
 }
 function installAuditedReaderControls(){

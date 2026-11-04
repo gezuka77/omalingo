@@ -70,3 +70,11 @@ Use API keys for the corresponding providers. Cloud requests can incur charges. 
 ## Move your library
 
 Open **Settings → Backup & Restore** in each study language to export its library ZIP. Restore it to the matching language on the target account. See [Administration and recovery](ADMIN.md) for full-installation backups, which also cover accounts and connection settings.
+
+
+### Following audio while reading
+
+The active generated-speech sentence is highlighted, including after using
+**Beginning**. Page view keeps the text in place between spoken sentences.
+Audio follow scrolls when the active text leaves the reading window; touching or
+scrolling the text temporarily pauses automatic following so you can browse freely.

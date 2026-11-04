@@ -60,14 +60,16 @@ async function playSelectedReaderSentence(){
 setInterval(()=>{if(readerSentenceRange&&mediaPlaying()&&mediaTime()>=readerSentenceRange.end){if(player.loop)seekMedia(readerSentenceRange.start);else pauseMedia();}},100);
 
 function syncLocalSpeechFollow(){
- if(view!=='library'||playingLesson!==lid||!clips.length||player.paused||!Number.isFinite(player.duration)||player.duration<=0)return;
+ if(view!=='library'||playingLesson!==lid||!clips.length)return;
  const l=current(),part=C.segments(l?.text||'')[clipIndex];if(!l||!part)return;
- // Piper supplies a sentence clip without word timings. Use its progress only
- // to position the reading window; keep the whole spoken sentence highlighted.
- const progress=Math.min(.99,player.currentTime/player.duration),relative=Math.floor(part.text.length*progress);
- const offset=s.settings.sentenceMode?0:part.start+l.text.slice(part.start,part.end).indexOf(part.text);
- const tokens=$$('#reader-text .token');const target=tokens.find(el=>Number(el.dataset.end)>=offset+relative)||tokens.at(-1);
- if(target)followReaderPlayback(target,l,part.start+relative);
+ // Restore the sentence immediately, including time zero and after a redraw.
+ const offset=s.settings.sentenceMode?part.start+l.text.slice(part.start,part.end).indexOf(part.text):0;
+ const root=$('#reader-text'),mark=l.id+':'+clipIndex+':'+s.settings.sentenceMode;let active=syncLocalSpeechFollow.active;
+ if(syncLocalSpeechFollow.root!==root||syncLocalSpeechFollow.mark!==mark||!active?.isConnected){
+ active=null;for(const el of $$('#reader-text .token')){const start=Number(el.dataset.start)+offset,end=Number(el.dataset.end)+offset;const on=start<part.end&&end>part.start;el.classList.toggle('sounding',on);if(on&&!active)active=el;}
+ syncLocalSpeechFollow.root=root;syncLocalSpeechFollow.mark=mark;syncLocalSpeechFollow.active=active;
+ }
+ if(active&&!player.paused)followReaderPlayback(active,l,part.start);
 }
 
 function refreshSentenceVocabulary(){
