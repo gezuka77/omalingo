@@ -37,6 +37,7 @@ def javascript(brand_svg):
     mark = mark.replace('class="oma-lettermark"', 'class="oma-lettermark" aria-hidden="true" focusable="false"')
     constants = {
         "OMA_BRAND_NAME": "Oma Lingo",
+        "OMA_RELEASE_VERSION": read(ROOT / "VERSION").strip(),
         "OMA_SHORT_NAME": "O/L",
         "omaBrandMark": mark,
         "olReadingFox": read(FRONTEND / "ol-reading-fox.svg").strip(),

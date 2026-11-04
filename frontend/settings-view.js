@@ -7,7 +7,7 @@ const settingsTabId=key=>'settings-'+(key==='connections'?'ai':key)+'-tab';
 function settingsShell(){
  $('#voice-preview')?.pause();
  const sections=settingsSections();
- $('#main').innerHTML=`<section class="settings-page"><h1>Settings</h1><div class="settings-page-tabs" role="tablist" aria-label="Settings sections">${sections.map(([key,label])=>`<button id="${settingsTabId(key)}" role="tab" aria-selected="${settingsTab===key}" aria-controls="settings-content" class="${settingsTab===key?'active':''}">${label}</button>`).join('')}</div><section id="settings-content" role="tabpanel" aria-labelledby="${settingsTabId(settingsTab)}"></section></section>`;
+ $('#main').innerHTML=`<section class="settings-page"><h1>Settings <small class="settings-version" style="font-size:14px;font-weight:400;color:var(--muted);white-space:nowrap">v${E(OMA_RELEASE_VERSION)}</small></h1><div class="settings-page-tabs" role="tablist" aria-label="Settings sections">${sections.map(([key,label])=>`<button id="${settingsTabId(key)}" role="tab" aria-selected="${settingsTab===key}" aria-controls="settings-content" class="${settingsTab===key?'active':''}">${label}</button>`).join('')}</div><section id="settings-content" role="tabpanel" aria-labelledby="${settingsTabId(settingsTab)}"></section></section>`;
  for(const [tab] of sections)bind(settingsTabId(tab),()=>{settingsTab=tab;settings();});
 }
 function settings(){

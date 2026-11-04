@@ -11,6 +11,7 @@ setupParityShell=function(){focusedSetupOriginal();document.body.classList.add('
  for(const [key,icon]of [['library','library'],['words','words']]){const button=branch.querySelector('[data-nav='+key+']');button.setAttribute('aria-label',key==='words'?'O/L Words':'Library');button.innerHTML=focusedIcon(icon)+'<span class="nav-label">'+(key==='words'?'O/L Words':'Library')+'</span>';}
  $('#create-menu').setAttribute('aria-label','Import content');$('#create-menu').innerHTML=focusedIcon('plus')+'<span class="nav-label">Import</span>';$('#create-menu').onclick=()=>importDialog();$('#brand-home').onclick=()=>focusedNavigate('discover');
  $('.sidebar-bottom').insertAdjacentHTML('beforeend',olReadingFox);
+ const version=document.createElement('small');version.className='app-version sidebar-version';version.textContent='v'+OMA_RELEASE_VERSION;version.setAttribute('aria-label',OMA_BRAND_NAME+' version '+OMA_RELEASE_VERSION);version.style.cssText='display:block;margin-top:auto;padding:16px 14px 20px;color:var(--muted);font-size:12px;line-height:1.2;align-self:flex-start;white-space:nowrap';document.querySelector('.app-sidebar').append(version);
  const mobileBrand=document.createElement('button');mobileBrand.id='focused-mobile-brand';mobileBrand.setAttribute('aria-label',OMA_BRAND_NAME+' home');mobileBrand.innerHTML=omaBrandMark+'<strong>'+OMA_BRAND_NAME+'</strong>';mobileBrand.onclick=()=>focusedNavigate('discover');$('header').prepend(mobileBrand);
 };
 const focusedNavigateOriginal=parityNavigate;

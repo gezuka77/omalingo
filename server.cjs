@@ -3,6 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const {spawn} = require('node:child_process');
 const readline = require('node:readline');
+const RELEASE_VERSION=fs.readFileSync(path.join(__dirname,'VERSION'),'utf8').trim();
 const PORT = Number(process.env.OMA_PORT || 3217);
 const BIND_HOST = process.env.OMA_BIND_HOST || '127.0.0.1';
 const publicOrigin = process.env.OMA_PUBLIC_ORIGIN ? new URL(process.env.OMA_PUBLIC_ORIGIN) : null;
@@ -91,7 +92,7 @@ const server = http.createServer(async(req,res)=>{
   if(req.headers.origin){res.setHeader('Access-Control-Allow-Origin',req.headers.origin);res.setHeader('Vary','Origin');res.setHeader('Access-Control-Allow-Credentials','true');}
   if(req.method==='OPTIONS'){res.writeHead(204,{'Access-Control-Allow-Methods':'GET, PUT, POST, DELETE, HEAD, OPTIONS','Access-Control-Allow-Headers':'Content-Type, Range, X-File-Name, X-Oma-User, X-Oma-Language'});res.end();return;}
   if(await auth.handle(req,res,pathname,{secure:isPublic}))return;
-  if(pathname==='/api/health'){json(res,200,{service:'oma',appVersion:4,resourceCatalogVersion:2,processId:process.pid,authentication:true,temporaryChat:true,ankiSync:true});return;}
+  if(pathname==='/api/health'){json(res,200,{service:'oma',releaseVersion:RELEASE_VERSION,appVersion:4,resourceCatalogVersion:2,processId:process.pid,authentication:true,temporaryChat:true,ankiSync:true});return;}
   const protectedPath=pathname.startsWith('/api/')||pathname.startsWith('/media/')||pathname.startsWith('/audio-cache/');
   const user=protectedPath?auth.current(req):null;
   if(protectedPath&&!user){json(res,401,{error:'Sign in to O/L.'});return;}
