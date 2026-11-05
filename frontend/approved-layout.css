@@ -256,6 +256,7 @@ body.focused-ui.approved-layout .pv-tools #csv-import{margin:0;white-space:nowra
 /* Keep phone reading space for the lesson, with its title available in full. */
 @media(max-width:800px){
  body.focused-ui.approved-layout.reader-mode header{display:none}
+ body.focused-ui.approved-layout.reader-mode #main{max-height:calc(100dvh - var(--focused-player-height,105px) - var(--focused-nav-height,71px));overflow:clip!important}
  body.focused-ui.approved-layout.reader-mode .reading-lesson-title{display:block!important;padding:8px 0!important;margin:0 0 8px!important;min-height:0}
  body.focused-ui.approved-layout.reader-mode .reading-lesson-title .reader-source-art,
  body.focused-ui.approved-layout.reader-mode .reading-lesson-title .reader-source-publisher,

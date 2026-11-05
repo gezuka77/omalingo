@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.6] - 2026-11-05
+
+### Fixed
+
+- Keep the mobile reader’s original source and bottom content reachable without overscrolling, in page and sentence views.
+- Close the mobile settings selector after a choice instead of focusing and reopening it.
+
+### Data and compatibility
+
+- Existing accounts, lessons, translations and playback settings are preserved. No migration is required.
+
 ## [0.2.5] - 2026-11-05
 
 ### Added
