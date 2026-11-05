@@ -736,5 +736,192 @@
     "mode": "website",
     "feedUrl": "https://feeds.soundon.fm/podcasts/8329ce3a-6cc8-4a3c-a12d-1a5b934060a0.xml",
     "browseOnly": true
+  },
+  {
+    "id": "fi-hs-headlines",
+    "language": "fi",
+    "name": "Helsingin Sanomat",
+    "url": "https://www.hs.fi/",
+    "feedUrl": "https://www.hs.fi/rss/tuoreimmat.xml",
+    "mode": "website",
+    "kind": "news",
+    "category": "News Feed",
+    "categories": [
+      "News Feed"
+    ],
+    "description": "National newspaper headlines. Articles open on the publisher’s site; a subscription may be required.",
+    "availability": "verified",
+    "browseOnly": true,
+    "access": "Headlines only · opens publisher · subscription or consent may be required"
+  },
+  {
+    "id": "fi-is-headlines",
+    "language": "fi",
+    "name": "Ilta-Sanomat",
+    "url": "https://www.is.fi/",
+    "feedUrl": "https://www.is.fi/rss/tuoreimmat.xml",
+    "mode": "website",
+    "kind": "news",
+    "category": "News Feed",
+    "categories": [
+      "News Feed"
+    ],
+    "description": "Latest national newspaper headlines. Articles open on the publisher’s site.",
+    "availability": "verified",
+    "browseOnly": true,
+    "access": "Headlines only · opens publisher · subscription or consent may be required"
+  },
+  {
+    "id": "fi-il-headlines",
+    "language": "fi",
+    "name": "Iltalehti",
+    "url": "https://www.iltalehti.fi/",
+    "feedUrl": "https://www.iltalehti.fi/rss/uutiset.xml",
+    "mode": "website",
+    "kind": "news",
+    "category": "News Feed",
+    "categories": [
+      "News Feed"
+    ],
+    "description": "Latest national newspaper headlines. Articles open on the publisher’s site.",
+    "availability": "verified",
+    "browseOnly": true,
+    "access": "Headlines only · opens publisher · subscription or consent may be required"
+  },
+  {
+    "id": "fi-is-entertainment",
+    "language": "fi",
+    "name": "Ilta-Sanomat · Viihde",
+    "url": "https://www.is.fi/viihde/",
+    "feedUrl": "https://www.is.fi/rss/viihde.xml",
+    "mode": "website",
+    "kind": "news",
+    "category": "Entertainment",
+    "categories": [
+      "Entertainment"
+    ],
+    "description": "Entertainment headlines from Ilta-Sanomat. Articles open on the publisher’s site.",
+    "availability": "verified",
+    "browseOnly": true,
+    "access": "Headlines only · opens publisher · subscription or consent may be required"
+  },
+  {
+    "id": "fi-il-entertainment",
+    "language": "fi",
+    "name": "Iltalehti · Viihde",
+    "url": "https://www.iltalehti.fi/viihde",
+    "feedUrl": "https://www.iltalehti.fi/rss/viihde.xml",
+    "mode": "website",
+    "kind": "news",
+    "category": "Entertainment",
+    "categories": [
+      "Entertainment"
+    ],
+    "description": "Entertainment headlines from Iltalehti. Articles open on the publisher’s site.",
+    "availability": "verified",
+    "browseOnly": true,
+    "access": "Headlines only · opens publisher · subscription or consent may be required"
+  },
+  {
+    "id": "fi-espoo-city",
+    "language": "fi",
+    "name": "Espoo · City news",
+    "url": "https://www.espoo.fi/fi/uutiset",
+    "feedUrl": "https://www.espoo.fi/fi/rss/news",
+    "mode": "website",
+    "kind": "news",
+    "category": "Local News",
+    "categories": [
+      "Local News"
+    ],
+    "description": "Public Finnish news and announcements from the City of Espoo.",
+    "availability": "verified",
+    "browseOnly": false,
+    "access": "Public city news · free"
+  },
+  {
+    "id": "fi-vantaa-city",
+    "language": "fi",
+    "name": "Vantaa · City news",
+    "url": "https://www.vantaa.fi/fi/ajankohtaista",
+    "feedUrl": "https://www.vantaa.fi/fi/rss/topical/all",
+    "mode": "website",
+    "kind": "news",
+    "category": "Local News",
+    "categories": [
+      "Local News"
+    ],
+    "description": "Public Finnish news, decisions and announcements from the City of Vantaa.",
+    "availability": "verified",
+    "browseOnly": false,
+    "access": "Public city news · free"
+  },
+  {
+    "id": "fi-helsinki-city",
+    "language": "fi",
+    "name": "Helsinki · City news",
+    "url": "https://www.hel.fi/fi/uutiset",
+    "feedUrl": "https://www.hel.fi/fi/uutiset/rss",
+    "mode": "website",
+    "kind": "news",
+    "category": "Local News",
+    "categories": [
+      "Local News"
+    ],
+    "description": "Public Finnish news and announcements from the City of Helsinki.",
+    "availability": "verified",
+    "browseOnly": false,
+    "access": "Public city news · free"
+  },
+  {
+    "id": "fi-espoo-lansivayla",
+    "language": "fi",
+    "name": "Espoo · Länsiväylä",
+    "url": "https://www.lansivayla.fi/",
+    "feedUrl": "https://www.lansivayla.fi/feed/rss",
+    "mode": "website",
+    "kind": "news",
+    "category": "Local News",
+    "categories": [
+      "Local News"
+    ],
+    "description": "Local newspaper headlines for Espoo and nearby areas. Open articles on the publisher’s site.",
+    "availability": "verified",
+    "browseOnly": true,
+    "access": "Headlines only · opens publisher · subscription or consent may be required"
+  },
+  {
+    "id": "fi-vantaa-sanomat",
+    "language": "fi",
+    "name": "Vantaa · Vantaan Sanomat",
+    "url": "https://www.vantaansanomat.fi/",
+    "feedUrl": "https://www.vantaansanomat.fi/feed/rss",
+    "mode": "website",
+    "kind": "news",
+    "category": "Local News",
+    "categories": [
+      "Local News"
+    ],
+    "description": "Local newspaper headlines for Vantaa. Open articles on the publisher’s site.",
+    "availability": "verified",
+    "browseOnly": true,
+    "access": "Headlines only · opens publisher · subscription or consent may be required"
+  },
+  {
+    "id": "fi-helsinki-uutiset",
+    "language": "fi",
+    "name": "Helsinki · Helsingin Uutiset",
+    "url": "https://www.helsinginuutiset.fi/",
+    "feedUrl": "https://www.helsinginuutiset.fi/feed/rss",
+    "mode": "website",
+    "kind": "news",
+    "category": "Local News",
+    "categories": [
+      "Local News"
+    ],
+    "description": "Local newspaper headlines for Helsinki. Open articles on the publisher’s site.",
+    "availability": "verified",
+    "browseOnly": true,
+    "access": "Headlines only · opens publisher · subscription or consent may be required"
   }
 ]

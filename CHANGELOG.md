@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.2.8] - 2026-11-05
+
+### Added
+
+- Browse categories, select a publisher and see its latest 10 items, with refresh and clear source access labels.
+- Add Finnish national and entertainment newspaper headlines, plus city and local-paper feeds for Espoo, Vantaa and Helsinki. Newspaper headlines open on their publisher’s site.
+
+### Fixed
+
+- Refresh source previews after ten minutes and keep sports, entertainment and local-news publishers in their matching categories.
+
+### Data and compatibility
+
+- Existing accounts, interests, followed sources, lessons and playback settings remain compatible. No migration is required.
+- Newspaper headline sources open articles on the publisher’s site; public city news remains available for direct import.
+
 ## [0.2.7] - 2026-11-05
 
 ### Fixed

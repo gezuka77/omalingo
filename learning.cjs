@@ -2,7 +2,7 @@
 const fs=require('fs'),path=require('path'),crypto=require('crypto'),{DatabaseSync}=require('node:sqlite');
 const languages=require('./languages.json');
 const retiredSources=new Set(require('./retired-source-ids.json'));
-const interests=['Reading','Videos','News Feed','Guided Courses','Mini Stories','Entertainment','Grammar','Travel','Podcasts','Sports','Technology'];
+const interests=['Reading','Videos','News Feed','Local News','Guided Courses','Mini Stories','Entertainment','Grammar','Travel','Podcasts','Sports','Technology'];
 function createLearning({dataDir=process.env.OMA_DATA_DIR||path.join(__dirname,'data'),voices}={}){
  fs.mkdirSync(dataDir,{recursive:true});const db=new DatabaseSync(path.join(dataDir,'learning.sqlite'));
  db.exec('PRAGMA journal_mode=WAL; CREATE TABLE IF NOT EXISTS profiles(user_id TEXT PRIMARY KEY,payload TEXT NOT NULL); CREATE TABLE IF NOT EXISTS sources(id TEXT PRIMARY KEY,language TEXT NOT NULL,payload TEXT NOT NULL,UNIQUE(language,payload));');
