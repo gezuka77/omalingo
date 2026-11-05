@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.9] - 2026-11-05
+
+### Fixed
+
+- Keep original-speech alignment timestamps inside their transcript spans when padded context overlaps a short neighboring word, preventing false chronological-order failures during video and audio imports.
+- Preserve transcript wording and acoustic timing validation, and invalidate older alignment cache entries.
+
 ## [0.2.8] - 2026-11-05
 
 ### Added

@@ -35,6 +35,7 @@ jobs:
           python3 scripts/build_frontend.py --check
           node --check app.js
           node --test tests/*.test.cjs
+          python3 -m unittest discover -s tests -p '*_test.py'
 
       - name: Read version
         id: release
