@@ -12,7 +12,7 @@ FRONTEND = ROOT / "frontend"
 MODULES = (
     "parity-shell.js", "parity-vocabulary.js", "sidebar-controls.js",
     "reader-dictionaries.js", "openai-transcription.js", "library-discovery.js",
-    "import-wizard.js", "reader-presentation.js", "reader-player.js",
+    "import-wizard.js", "reader-presentation.js", "reader-player.js", "reader-translation.js",
     "playlists-view.js", "adaptive-ui.js", "openrouter-settings.js",
     "connections-view.js", "anki-ui.js", "settings-view.js",
     "transcript-options.js", "video-layout.js", "import-progress.js",

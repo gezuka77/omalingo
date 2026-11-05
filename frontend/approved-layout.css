@@ -265,3 +265,18 @@ body.focused-ui.approved-layout .pv-tools #csv-import{margin:0;white-space:nowra
  body.focused-ui.approved-layout.reader-mode .reading-lesson-title .reader-source-copy{display:block}
  body.focused-ui.approved-layout.reader-mode .reading-lesson-title h1{display:block;font-size:16px!important;line-height:1.35;margin:0}
 }
+
+/* In-app notices and comparisons use the same surfaces as the reader. */
+body.focused-ui.approved-layout dialog{background:var(--focused-panel);color:var(--ink);border:1px solid var(--line);border-radius:18px;box-shadow:0 16px 60px #0005;max-height:85dvh;overflow:auto;color-scheme:inherit}
+body.focused-ui.approved-layout dialog::backdrop{background:#07151199}
+body.focused-ui.approved-layout dialog label,body.focused-ui.approved-layout dialog small{color:var(--muted)}
+body.focused-ui.approved-layout dialog input,body.focused-ui.approved-layout dialog select{background:var(--focused-bg);color:var(--ink);border:1px solid var(--line);border-radius:10px}
+body.focused-ui.approved-layout .toast{background:var(--focused-panel);color:var(--ink);border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 24px #0003}
+.translation-comparison,.translation-choice,.translation-samples{display:grid;gap:16px;min-width:0}
+.translation-choice>div{display:grid;gap:10px}
+.translation-choice [hidden]{display:none!important}
+.translation-sample-source,.translation-sample-card{margin:0;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--focused-soft);overflow-wrap:anywhere}
+.translation-sample-card{display:grid;gap:12px;background:var(--focused-bg)}
+.translation-sample-card p{white-space:pre-wrap}
+.translation-comparison input,.translation-comparison select,.translation-choice input,.translation-choice select{width:100%;min-width:0}
+@media(max-width:800px){body.focused-ui.approved-layout dialog{max-width:calc(100vw - 24px);padding:18px}.translation-comparison .row>button{flex:1 1 160px}}
