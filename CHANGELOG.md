@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.7] - 2026-11-05
+
+### Fixed
+
+- Show the full language source catalog on Discover regardless of interests, follows or successful lesson previews. Include feed publishers in Browse all sources.
+- Suppress the settings panel outline after mobile section navigation while retaining focus indicators on controls.
+
+### Data and compatibility
+
+- Existing accounts, interests, followed sources, lessons and playback settings are preserved. No migration is required.
+
 ## [0.2.6] - 2026-11-05
 
 ### Fixed
