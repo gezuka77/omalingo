@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.2.5] - 2026-11-05
+
+### Added
+
+- Set the default translator in Settings → Translation and compare current-sentence samples from the reader menu before choosing a translator for that lesson.
+- Keep translation progress inline and match app dialogs and notices to the reader theme.
+
+### Fixed
+
+- Start mobile audio-follow scrolling before speech reaches the bottom lines, while preserving manual scrolling priority.
+- Translate only the current sentence in sentence view; cache each source sentence separately and keep full lesson translations for page view.
+
+### Data and compatibility
+
+- Existing accounts, lessons, saved meanings, translations and playback settings remain compatible. No migration is required.
+- OpenAI translations and previews use the saved API connection and incur usage charges only when selected.
+
 ## [0.2.4] - 2026-11-05
 
 ### Fixed

@@ -18,8 +18,9 @@ function followReaderPlayback(active,lesson,charStart){
  const rect=active.getBoundingClientRect(),internal=article.scrollHeight>article.clientHeight+2;
  const bounds=internal?article.getBoundingClientRect():{top:0,bottom:innerHeight-115};
  const height=bounds.bottom-bounds.top;
- // Keep a stable reading window instead of repeatedly recentering visible text.
- if(rect.top>=bounds.top+24&&rect.bottom<=bounds.bottom-48)return;
+ // Leave the lower third free on phones so the next lines stay visible ahead of speech.
+ const lookAhead=matchMedia('(max-width:800px)').matches?Math.max(48,height*.35):48;
+ if(rect.top>=bounds.top+24&&rect.bottom<=bounds.bottom-lookAhead)return;
  const delta=rect.top-(bounds.top+height*.3);
  const current=internal?article.scrollTop:window.scrollY;
  const limit=internal?article.scrollHeight-article.clientHeight:document.documentElement.scrollHeight-innerHeight;
