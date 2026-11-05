@@ -27,6 +27,7 @@ Common file formats include TXT, HTML, DOCX, EPUB, text-based PDF, SRT and VTT. 
 
 - Use **Sentence view** to work with one sentence at a time and **Page view** to read the passage. **Show Translation** displays an existing translation or requests one from the configured provider.
 - Use the bottom player to play, seek, change speed, move between sentences and return to the beginning. Source video or audio plays when available and selected. Generated narration uses the voice in **AI & Connections**.
+- Original-speech alignment uses local Whisper word timestamps and short correction spans. From v0.2.9, extra audio used for context cannot move corrected words across neighboring speech anchors. Transcript wording is preserved; a mismatched transcript or unreliable timing can still be rejected. Retry a previously failed alignment after updating.
 - Playback highlights the current text when the lesson has timing. The reader follows vertically and leaves some upcoming text in view. Use **Transcript** in the lesson menu to inspect or replace the transcript and **Sentence Audio & Timing** to work with alignment.
 - Open **Review Sentence** for sentence exercises or **Review Lesson** to practise the lesson’s vocabulary. Use the reader’s appearance controls or **Settings → Reader** to adjust typography and reading preferences.
 - Use the lesson’s playlist action to add it to a playlist. Open **Library → Playlists** to organize and play lessons in sequence.
