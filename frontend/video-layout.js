@@ -8,7 +8,8 @@ function layoutReaderVideo(){
  if(!dock.dataset.dockingReady){
   dock.dataset.dockingReady='true';
   const frame=$('#youtube-frame')||dock.querySelector('iframe'),wrap=document.createElement('div');wrap.className='video-frame-wrap';if(frame){frame.before(wrap);wrap.append(frame);}
-  const close=$('#close-video'),hide=document.createElement('button');hide.id='toggle-reader-video';hide.type='button';hide.textContent='Hide video';hide.setAttribute('aria-expanded','true');
+  const collapsed=innerWidth<=800;dock.classList.toggle('video-collapsed',collapsed);wrap.inert=collapsed;
+  const close=$('#close-video'),hide=document.createElement('button');hide.id='toggle-reader-video';hide.type='button';hide.textContent=collapsed?'Show video':'Hide video';hide.setAttribute('aria-expanded',String(!collapsed));
   hide.onclick=()=>{const collapsed=dock.classList.toggle('video-collapsed');hide.textContent=collapsed?'Show video':'Hide video';hide.setAttribute('aria-expanded',String(!collapsed));wrap.inert=collapsed;focusedMeasure();};
   close?.before(hide);close?.setAttribute('aria-label','Stop original video');if(close)close.title='Stop video';
  }

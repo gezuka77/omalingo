@@ -16,6 +16,35 @@ os.environ.setdefault('ARGOS_PACKAGES_DIR',str(DATA/'models'/'argos'))
 YOUTUBE_RUNTIME={'js_runtimes':{'node':{}}} if os.environ.get('OMA_YOUTUBE_USE_NODE')=='1' else {}
 sys.path.insert(0,str(ROOT/'runtime'/'import-packages'))
 sys.stdin.reconfigure(encoding='utf-8');sys.stdout.reconfigure(encoding='utf-8')
+def local_translation(text):
+    if LANGUAGE=='en':return {'text':text,'provider':'Original English text'}
+    import argostranslate.translate as translate
+    code='zh' if LANGUAGE=='zh-Hant' else LANGUAGE
+    def installed():
+        languages=translate.get_installed_languages()
+        source=next((lang for lang in languages if lang.code==code),None)
+        target=next((lang for lang in languages if lang.code=='en'),None)
+        return source.get_translation(target) if source and target else None
+    model=installed()
+    if model is None:
+        install_translation()
+        model=installed()
+    if model is None:raise ValueError('The '+LANGUAGE_NAME+' → English local translation model is unavailable. Retry its download in Settings → AI & Connections → Offline tools.')
+    return {'text':model.translate(text),'provider':'Argos · local'}
+
+def install_translation():
+    if LANGUAGE=='en':return {'installed':True}
+    import argostranslate.package as package
+    code='zh' if LANGUAGE=='zh-Hant' else LANGUAGE
+    try:
+        package.update_package_index()
+        model=next((p for p in package.get_available_packages() if p.from_code==code and p.to_code=='en'),None)
+        if not model:raise ValueError('No '+LANGUAGE_NAME+' → English Argos package was found.')
+        package.install_from_path(model.download())
+    except Exception as error:
+        raise ValueError('Could not prepare '+LANGUAGE_NAME+' → English local translation. Check the internet connection and retry the model download in Settings → AI & Connections → Offline tools. '+str(error)) from error
+    return {'installed':True}
+
 def clean_html(raw):
     from bs4 import BeautifulSoup
     if isinstance(raw,bytes):
@@ -172,15 +201,8 @@ def execute(req):
     if action=='youtube-captions':return youtube(req['url'],req.get('captionMode','publisher'))
     if action=='youtube-caption-tracks':return youtube(req['url'],'inventory')
     if action=='dictionary':return dictionary(req['term'])
-    if action=='translate':
-        if LANGUAGE=='en':return {'text':req['text'],'provider':'Original English text'}
-        import argostranslate.translate as translate
-        return {'text':translate.translate(req['text'],LANGUAGE,'en'),'provider':'Argos · local'}
-    if action=='install-translation':
-        import argostranslate.package as package
-        package.update_package_index();model=next((p for p in package.get_available_packages() if p.from_code==LANGUAGE and p.to_code=='en'),None)
-        if not model:raise ValueError('No '+LANGUAGE_NAME+' → English Argos package was found.')
-        package.install_from_path(model.download());return {'installed':True}
+    if action=='translate':return local_translation(req['text'])
+    if action=='install-translation':return install_translation()
     if action=='prepare-openai-audio':
         import av, numpy as np, wave, uuid
         source=req.get('path');metadata={}

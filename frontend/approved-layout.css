@@ -230,7 +230,9 @@ body.focused-ui.approved-layout #brand-home{font-size:18px;font-weight:650;lette
 body.focused-ui.approved-layout #brand-home .oma-lettermark{width:27px;height:27px;flex:0 0 27px}
 body.focused-ui.approved-layout .app-sidebar [data-nav=words] .nav-label,body.focused-ui.approved-layout .app-sidebar [data-nav=ai] .nav-label{min-width:0;white-space:normal;line-height:1.2}
 .ol-reading-fox{display:block;width:72px;height:72px}
+body.focused-ui.approved-layout .sidebar-bottom{flex:0 0 auto;align-content:end;justify-items:center;gap:8px}
 body.focused-ui.approved-layout .sidebar-bottom .ol-reading-fox{justify-self:center;pointer-events:none}
+body.focused-ui.approved-layout .sidebar-version{display:block;margin:0;padding:0 0 8px;color:var(--muted);font-size:12px;line-height:1.2;white-space:nowrap}
 body.focused-ui.approved-layout .focused-welcome .ol-reading-fox{display:none}
 @media(max-width:800px){
  body.focused-ui.approved-layout .focused-welcome .ol-reading-fox{display:block;margin-bottom:8px}
@@ -250,3 +252,16 @@ body.focused-ui.approved-layout .pv-control-line{margin-top:16px}
 body.focused-ui.approved-layout .pv-tools{flex-wrap:wrap}
 body.focused-ui.approved-layout .pv-tools #csv-import{margin:0;white-space:nowrap;font-size:13px}
 @media(max-width:520px){body.focused-ui.approved-layout #pv-topline.approved-word-toolbar>small{width:100%}body.focused-ui.approved-layout .pv-tabs{flex-wrap:wrap;gap:3px}body.focused-ui.approved-layout .pv-tabs button{min-width:0;padding:8px 9px;font-size:12px}}
+
+/* Keep phone reading space for the lesson, with its title available in full. */
+@media(max-width:800px){
+ body.focused-ui.approved-layout.reader-mode header{display:none}
+ body.focused-ui.approved-layout.reader-mode .reading-lesson-title{display:block!important;padding:8px 0!important;margin:0 0 8px!important;min-height:0}
+ body.focused-ui.approved-layout.reader-mode .reading-lesson-title .reader-source-art,
+ body.focused-ui.approved-layout.reader-mode .reading-lesson-title .reader-source-publisher,
+ body.focused-ui.approved-layout.reader-mode .reading-lesson-title .reader-source-facts,
+ body.focused-ui.approved-layout.reader-mode .reading-lesson-title .reader-source-summary,
+ body.focused-ui.approved-layout.reader-mode .reading-lesson-title .reader-source-link{display:none}
+ body.focused-ui.approved-layout.reader-mode .reading-lesson-title .reader-source-copy{display:block}
+ body.focused-ui.approved-layout.reader-mode .reading-lesson-title h1{display:block;font-size:16px!important;line-height:1.35;margin:0}
+}

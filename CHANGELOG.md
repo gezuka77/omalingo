@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.2.4] - 2026-11-05
+
+### Fixed
+
+- Keep the sidebar fox at the bottom left with the version directly beneath it.
+- Prepare missing local translation models on first use and report actionable download errors; map Traditional Chinese to the Argos Chinese model.
+- Stop repeating the interest onboarding prompt after topics have been selected for a study language.
+- Reduce the mobile reader header to the lesson title and start YouTube video collapsed with a Show video control.
+
+### Data and compatibility
+
+- Existing accounts, lessons, saved meanings and playback settings are preserved. No migration is required.
+- The first local translation needs internet access to download its free model; later translations run locally.
+
 ## [0.2.3] - 2026-11-05
 
 ### Added
@@ -34,7 +48,7 @@
 ### Added
 
 - A public source distribution with site-specific configuration and private history kept separately.
-- Direct central Anki server support in Settings → Anki; no running desktop or AnkiConnect add-on is needed in this mode.
+- Direct central Anki server support in Settings â†’ Anki; no running desktop or AnkiConnect add-on is needed in this mode.
 - Separate connections for each authenticated user, linked by an administrator using immutable account IDs and private per-user API tokens.
 - Vocabulary exchange with other apps through the user's central collection, including retries without duplicate cards and central collection precedence for concurrent meaning edits.
 - Connection status and guidance for native Anki clients while preserving existing desktop AnkiConnect installations.
