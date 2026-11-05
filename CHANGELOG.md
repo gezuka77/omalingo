@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.3] - 2026-11-05
+
+### Added
+
+- Attach an exact-image manifest to numbered releases so external deployment controllers can verify and consume published builds automatically.
+
 ## [0.2.2] - 2026-11-04
 
 ### Fixed
