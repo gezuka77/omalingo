@@ -268,6 +268,8 @@ body.focused-ui.approved-layout .pv-tools #csv-import{margin:0;white-space:nowra
 }
 
 /* In-app notices and comparisons use the same surfaces as the reader. */
+/* Section navigation moves focus here without outlining the entire panel. */
+body.focused-ui.approved-layout #settings-content:focus{outline:none}
 body.focused-ui.approved-layout dialog{background:var(--focused-panel);color:var(--ink);border:1px solid var(--line);border-radius:18px;box-shadow:0 16px 60px #0005;max-height:85dvh;overflow:auto;color-scheme:inherit}
 body.focused-ui.approved-layout dialog::backdrop{background:#07151199}
 body.focused-ui.approved-layout dialog label,body.focused-ui.approved-layout dialog small{color:var(--muted)}
@@ -281,3 +283,6 @@ body.focused-ui.approved-layout .toast{background:var(--focused-panel);color:var
 .translation-sample-card p{white-space:pre-wrap}
 .translation-comparison input,.translation-comparison select,.translation-choice input,.translation-choice select{width:100%;min-width:0}
 @media(max-width:800px){body.focused-ui.approved-layout dialog{max-width:calc(100vw - 24px);padding:18px}.translation-comparison .row>button{flex:1 1 160px}}
+
+body.focused-ui.approved-layout .focused-source-catalog{margin-top:32px}
+body.focused-ui.approved-layout .focused-source-catalog .learning-resource-grid{margin-top:16px}

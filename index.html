@@ -691,6 +691,8 @@ body.focused-ui.approved-layout .pv-tools #csv-import{margin:0;white-space:nowra
 }
 
 /* In-app notices and comparisons use the same surfaces as the reader. */
+/* Section navigation moves focus here without outlining the entire panel. */
+body.focused-ui.approved-layout #settings-content:focus{outline:none}
 body.focused-ui.approved-layout dialog{background:var(--focused-panel);color:var(--ink);border:1px solid var(--line);border-radius:18px;box-shadow:0 16px 60px #0005;max-height:85dvh;overflow:auto;color-scheme:inherit}
 body.focused-ui.approved-layout dialog::backdrop{background:#07151199}
 body.focused-ui.approved-layout dialog label,body.focused-ui.approved-layout dialog small{color:var(--muted)}
@@ -704,6 +706,9 @@ body.focused-ui.approved-layout .toast{background:var(--focused-panel);color:var
 .translation-sample-card p{white-space:pre-wrap}
 .translation-comparison input,.translation-comparison select,.translation-choice input,.translation-choice select{width:100%;min-width:0}
 @media(max-width:800px){body.focused-ui.approved-layout dialog{max-width:calc(100vw - 24px);padding:18px}.translation-comparison .row>button{flex:1 1 160px}}
+
+body.focused-ui.approved-layout .focused-source-catalog{margin-top:32px}
+body.focused-ui.approved-layout .focused-source-catalog .learning-resource-grid{margin-top:16px}
 
 /* End personal parity stylesheet */
 </style><link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2216%22%20fill%3D%22%23163c48%22/%3E%3Cpath%20d%3D%22M11%2017c7-2%2014%200%2021%205%207-5%2014-7%2021-5v30c-7-2-14%200-21%205-7-5-14-7-21-5Z%22%20fill%3D%22none%22%20stroke%3D%22%23f4f5e9%22%20stroke-width%3D%223.5%22%20stroke-linejoin%3D%22round%22/%3E%3Cpath%20d%3D%22M32%2023v28M19%2026l6%202M19%2033l6%202M39%2028l6-2M39%2035l6-2%22%20fill%3D%22none%22%20stroke%3D%22%2389c9ad%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E%0A"></head><body><main><h1>Opening O/L…</h1></main><script src="app.js"></script></body></html>
